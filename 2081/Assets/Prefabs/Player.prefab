@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5972719655344953660}
   walkSpeed: 12
+  crouchSpeed: 6
   sprintSpeed: 25
   gravity: -19.62
   jumpHeight: 3
