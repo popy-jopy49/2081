@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         sanity = maxSanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
         InputManager.MAIN.Character.UseSanityKit.started += UseSanityKit_Started;
+        OnSanityChanged += OnSanityChange;
     }
 
     private void Update()
@@ -27,6 +28,13 @@ public class Player : MonoBehaviour
             sanity = Mathf.Clamp(sanity -= 0.01f, 0, maxSanity);
             OnSanityChanged?.Invoke(null, (sanity, maxSanity));
         }
+    }
+
+    private void OnSanityChange(object sender, (float c, float m) sanity)
+    {
+        if (sanity.c > 0)
+            return;
+        // Respawn
     }
 
     private void UseSanityKit_Started(InputAction.CallbackContext obj)
@@ -39,13 +47,13 @@ public class Player : MonoBehaviour
         AddSanity(maxSanityIncrease);
     }
 
-    public void SetMaxSanity(float new_max_sanity)
+    private void SetMaxSanity(float new_max_sanity)
     {
         maxSanity = new_max_sanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
     }
 
-    public void AddSanity(float added_sanity)
+    private void AddSanity(float added_sanity)
     {
         sanity += added_sanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
