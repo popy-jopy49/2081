@@ -12,9 +12,9 @@ public class EnergyBar : MonoBehaviour
         CharacterControllerFPS.OnEnergyChanged += OnEnergyChanged;
     }
 
-    private void OnEnergyChanged(object sender, (float current, float max) e)
+    private void OnEnergyChanged(object sender, (float current, float max) energy)
     {
-        slider.value = e.current / e.max;
+        slider.value = energy.current / energy.max;
     }
 
 }
