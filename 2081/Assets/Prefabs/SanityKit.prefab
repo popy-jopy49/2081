@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 8654302951095354993}
   - component: {fileID: 4714877639543502097}
   - component: {fileID: 5703671876699742994}
+  - component: {fileID: 3893678960477962986}
   m_Layer: 0
   m_Name: SanityKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4616030985434483429
 Transform:
@@ -96,3 +97,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1766a6e99c671449bc179bdbdd23f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3893678960477962986
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5523796046395536488}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8, y: 4, z: 8}
+  m_Center: {x: 0, y: 1.5, z: 0}
