@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4616030985434483429}
   - component: {fileID: 8654302951095354993}
   - component: {fileID: 4714877639543502097}
-  - component: {fileID: 4235946063625537382}
   - component: {fileID: 5703671876699742994}
   m_Layer: 0
   m_Name: SanityKit
@@ -85,27 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4235946063625537382
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5523796046395536488}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5703671876699742994
 MonoBehaviour:
   m_ObjectHideFlags: 0

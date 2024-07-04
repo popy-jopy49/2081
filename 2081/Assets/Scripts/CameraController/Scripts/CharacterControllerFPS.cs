@@ -108,12 +108,4 @@ public class CharacterControllerFPS : MonoBehaviour {
         OnEnergyChanged?.Invoke(this, (currentEnergy, maxEnergy));
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent(out IPickUpAble pickupable)) return;
-
-        pickupable.OnPickUp();
-        Destroy(other.gameObject);
-    }
-
 }
