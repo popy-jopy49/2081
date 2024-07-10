@@ -6,6 +6,7 @@ public class CharacterControllerFPS : MonoBehaviour {
 
     [SerializeField] private CharacterController controller;
 
+    // Movement values
     private float speed = 12f;
     [SerializeField] private float walkSpeed = 12f;
     [SerializeField] private float crouchSpeed = 12f;
@@ -14,6 +15,7 @@ public class CharacterControllerFPS : MonoBehaviour {
     [SerializeField] private float jumpHeight = 3f;
     private Transform cameraO;
 
+    // Ground Checking
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask whatIsGround;
@@ -21,6 +23,7 @@ public class CharacterControllerFPS : MonoBehaviour {
     Vector3 velocity;
     bool isGrounded;
 
+    // Energy values
     public static EventHandler<(float c, float m)> OnEnergyChanged;
     private float currentEnergy = 0f;
     [SerializeField] private float maxEnergy = 20f;
@@ -30,15 +33,19 @@ public class CharacterControllerFPS : MonoBehaviour {
 
     private void Awake()
     {
+        // Find Main Camera
         cameraO = transform.Find("Main Camera");
     }
 
     private void OnEnable()
     {
+        // Update maxEnergy on UI
         currentEnergy = maxEnergy;
         OnEnergyChanged?.Invoke(this, (currentEnergy, maxEnergy));
         speed = walkSpeed;
-        InputManager.MAIN.Character.Sprint.started += Sprint;
+
+		// Subscribe from movement input functions
+		InputManager.MAIN.Character.Sprint.started += Sprint;
         InputManager.MAIN.Character.Sprint.canceled += Walk;
         InputManager.MAIN.Character.Crouch.started += Crouch;
         InputManager.MAIN.Character.Crouch.canceled += Walk;
@@ -46,6 +53,7 @@ public class CharacterControllerFPS : MonoBehaviour {
 
     private void OnDisable()
     {
+        // Unsubscribe from movement input functions
         InputManager.MAIN.Character.Sprint.started -= Sprint;
         InputManager.MAIN.Character.Sprint.canceled -= Walk;
         InputManager.MAIN.Character.Crouch.started -= Crouch;
@@ -54,18 +62,23 @@ public class CharacterControllerFPS : MonoBehaviour {
 
     private void Crouch(InputAction.CallbackContext ctx)
     {
+        // Don't crouch if we are already sprinting
         if (speed != walkSpeed) return;
         speed = crouchSpeed;
+
+        // Change camera pos and collider to give allusion of crouching
         cameraO.transform.localPosition = new Vector3(0f, 0f, 0f);
         controller.height = 2f;
         controller.center = new Vector3(0, -1, 0);
     }
     private void Sprint(InputAction.CallbackContext ctx)
     {
+        // If we are not crouching, sprint
         if (speed == walkSpeed) speed = sprintSpeed;
     }
     private void Walk(InputAction.CallbackContext ctx)
     {
+        // Reset values for speed and collider
         speed = walkSpeed;
         cameraO.transform.localPosition = new Vector3(0f, 1.55f, 0f);
         controller.height = 4f;
@@ -74,37 +87,46 @@ public class CharacterControllerFPS : MonoBehaviour {
 
     void Update()
     {
+        // Check if player is touching the ground
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, whatIsGround);
 
+        // Set velocity to constant when on the ground
         if(isGrounded && velocity.y < 0)
 		{
             velocity.y = -2f;
 		}
 
+        // Get movement input
         Vector2 walkInput = InputManager.MAIN.Character.Move.ReadValue<Vector2>().normalized;
-
+        // Set move vectors in correct directions in local space
         Vector3 move = transform.right * walkInput.x + transform.forward * walkInput.y;
 
+        // Jump if on the ground and have enough energy
 		if (InputManager.MAIN.Character.Jump.triggered && isGrounded && currentEnergy >= jumpEnergy)
 		{
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             currentEnergy -= jumpEnergy;
 		}
 
+        // Move the player first with movement and then with jump
         controller.Move(speed * Time.deltaTime * move);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
+        // Lose energy when sprinting and moving otherwise gain energy
         if (speed == sprintSpeed && walkInput != Vector2.zero)
             currentEnergy -= sprintEnergy;
         else
             currentEnergy += energyRegain;
 
+        // Clamp energy between 0 and the max
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
 
+        // Set speed to walking when the player runs out of energy
         if (currentEnergy <= 0)
             speed = walkSpeed;
 
+        // Update UI
         OnEnergyChanged?.Invoke(this, (currentEnergy, maxEnergy));
     }
 

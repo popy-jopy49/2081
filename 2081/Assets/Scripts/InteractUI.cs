@@ -5,6 +5,7 @@ public class InteractUI : MonoBehaviour
 
     private void Awake()
     {
+        // Call function when an interactable goes in or out of range
         Player.OnInteractablesChange += OnInteractableChange;
     }
 

@@ -6,19 +6,25 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
 
+    // Events
     public static EventHandler<int> OnInteractablesChange;
     public static EventHandler<int> OnSanityKitsUpdated;
     public static EventHandler<(float c, float m)> OnSanityChanged;
-    private float sanity = 0;
+
+    // Sanity values
     [SerializeField] private float maxSanity = 20f;
     [SerializeField] private float maxSanityIncrease = 4f;
     [SerializeField] private bool debug = true;
     private static int sanityKits = 3;
-    private static Vector3 respawnPos = Vector3.zero;
+	private float sanity = 0;
+
+    // Other
+	private static Vector3 respawnPos = Vector3.zero;
     private List<IInteractable> interactables = new();
 
     private void Awake()
     {
+        // Set intial values and subscribe to correct events
         sanity = maxSanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
         InputManager.MAIN.Character.UseSanityKit.started += UseSanityKit_Started;
@@ -28,6 +34,7 @@ public class Player : MonoBehaviour
 
     private void Interact_Started(InputAction.CallbackContext obj)
     {
+        // If interactables nearby, remove it and call OnInteract();
         if (interactables.Count <= 0) return;
         interactables[0].OnInteract();
         interactables.RemoveAt(0);
@@ -35,6 +42,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        // DEBUG: test to see sanity work and sanity kits
         if (debug)
         {
             sanity = Mathf.Clamp(sanity -= 0.01f, 0, maxSanity);
@@ -46,26 +54,29 @@ public class Player : MonoBehaviour
     {
         if (sanity.c > 0)
             return;
-        // Respawn
+        // Respawn at position if sanity reaches 0
         transform.position = respawnPos;
     }
 
     private void UseSanityKit_Started(InputAction.CallbackContext obj)
     {
-        if (sanityKits <= 0)
+        if (sanityKits <= 0) // Only use if we have one
             return;
         sanityKits--;
+        // Update UI and values of sanity
         OnSanityKitsUpdated?.Invoke(this, sanityKits);
         SetMaxSanity(maxSanity + maxSanityIncrease);
         AddSanity(maxSanityIncrease);
     }
 
+    // Set max sanity and update UI
     private void SetMaxSanity(float new_max_sanity)
     {
         maxSanity = new_max_sanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
     }
 
+    // Increase sanity by amount and update UI
     private void AddSanity(float added_sanity)
     {
         sanity += added_sanity;
@@ -76,8 +87,8 @@ public class Player : MonoBehaviour
     {
         if (!other.TryGetComponent(out IInteractable pickupable)) return;
 
-        // Add
-        interactables.Add(pickupable);
+		// Add interactable to list of nearby interactables and update UI
+		interactables.Add(pickupable);
         OnInteractablesChange?.Invoke(this, interactables.Count);
     }
 
@@ -85,17 +96,19 @@ public class Player : MonoBehaviour
     {
         if (!other.TryGetComponent(out IInteractable pickupable)) return;
 
-        // Remove
+        // Remove interactable from list of nearby interactables and update UI
         interactables.Remove(pickupable);
         OnInteractablesChange?.Invoke(this, interactables.Count);
     }
 
+    // Increase sanity kit count by 1 and update UI
     public static void AddSanityKit()
     {
         sanityKits++;
         OnSanityKitsUpdated?.Invoke(null, sanityKits);
     }
 
+    // Set respawn position to last checkpoint position
     public static void SetLatestCheckpoint(Vector3 pos)
     {
         respawnPos = pos;
