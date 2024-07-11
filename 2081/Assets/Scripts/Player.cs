@@ -21,10 +21,13 @@ public class Player : MonoBehaviour
     // Other
 	private static Vector3 respawnPos = Vector3.zero;
     private List<IInteractable> interactables = new();
+    public static Camera CAMERA;
+    private static bool hasKeycard = false;
 
     private void Awake()
     {
         // Set intial values and subscribe to correct events
+        CAMERA = transform.Find("Camera").GetComponent<Camera>();
         sanity = maxSanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
         InputManager.MAIN.Character.UseSanityKit.started += UseSanityKit_Started;
@@ -34,10 +37,19 @@ public class Player : MonoBehaviour
 
     private void Interact_Started(InputAction.CallbackContext obj)
     {
-        // If interactables nearby, remove it and call OnInteract();
+        // If interactables nearby, call OnInteract();
         if (interactables.Count <= 0) return;
-        interactables[0].OnInteract();
-        interactables.RemoveAt(0);
+        // If interaction successful, remove it from nearby interactables
+        if (interactables[0].OnInteract())
+		{
+			interactables.RemoveAt(0);
+            OnInteractablesChange?.Invoke(this, interactables.Count);
+			// TODO: Play success sound
+		}
+		else
+        {
+            // TODO: Play failure sound
+        }
     }
 
     private void Update()
@@ -113,5 +125,8 @@ public class Player : MonoBehaviour
     {
         respawnPos = pos;
     }
+
+    public static void PickUpKeycard() => hasKeycard = true;
+    public static bool HasKeycard() => hasKeycard;
 
 }

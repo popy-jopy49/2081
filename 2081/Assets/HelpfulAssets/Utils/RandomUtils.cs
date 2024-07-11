@@ -67,7 +67,7 @@ namespace SWAssets.Utils
 			}
 		}
 
-		public static string GetMonthNameShort(int month) => GetMonthName(month).Substring(0, 3);
+		public static string GetMonthNameShort(int month) => GetMonthName(month)[..3];
 
 		public static Vector3 GetRandomDir() =>
 			new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;

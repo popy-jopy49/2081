@@ -13,7 +13,6 @@ public class CharacterControllerFPS : MonoBehaviour {
     [SerializeField] private float sprintSpeed = 25f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 3f;
-    private Transform cameraO;
 
     // Ground Checking
     [SerializeField] private Transform groundCheck;
@@ -30,12 +29,6 @@ public class CharacterControllerFPS : MonoBehaviour {
     [SerializeField] private float energyRegain = 0.1f;
     [SerializeField] private float jumpEnergy = 3f;
     [SerializeField] private float sprintEnergy = 0.2f;
-
-    private void Awake()
-    {
-        // Find Main Camera
-        cameraO = transform.Find("Main Camera");
-    }
 
     private void OnEnable()
     {
@@ -67,20 +60,22 @@ public class CharacterControllerFPS : MonoBehaviour {
         speed = crouchSpeed;
 
         // Change camera pos and collider to give allusion of crouching
-        cameraO.transform.localPosition = new Vector3(0f, 0f, 0f);
+        Player.CAMERA.transform.localPosition = new Vector3(0f, 0f, 0f);
         controller.height = 2f;
         controller.center = new Vector3(0, -1, 0);
     }
+
     private void Sprint(InputAction.CallbackContext ctx)
     {
         // If we are not crouching, sprint
         if (speed == walkSpeed) speed = sprintSpeed;
     }
+
     private void Walk(InputAction.CallbackContext ctx)
     {
         // Reset values for speed and collider
         speed = walkSpeed;
-        cameraO.transform.localPosition = new Vector3(0f, 1.55f, 0f);
+		Player.CAMERA.transform.localPosition = new Vector3(0f, 1.55f, 0f);
         controller.height = 4f;
         controller.center = new Vector3(0, 0, 0);
     }

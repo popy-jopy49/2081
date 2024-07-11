@@ -4,10 +4,11 @@ public class SanityKit : MonoBehaviour, IInteractable
 {
 
     // Add a sanity kit to the player's count on pickup
-    public void OnInteract()
+    public bool OnInteract()
     {
         Player.AddSanityKit();
         Destroy(gameObject);
+        return true;
     }
 
 }
