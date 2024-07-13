@@ -8,16 +8,9 @@ public class GameAssets : Singleton<GameAssets> {
 
 	[Header("Prefabs")]
 	public GameObject MessagePrefab;
-	public GameObject MinePrefab;
-	public GameObject BoosterPrefab;
-	public GameObject SpikesPrefab;
-	public GameObject MissilePrefab;
-	public GameObject GrenadePrefab;
-	public GameObject PowerupPrefab;
-	public List<Sprite> PowerupSprites;
-
-    [Header("Effects")]
-    public ParticleSystem ExplosionPS;
+	public GameObject QTEPrefab;
+	public GameObject SequencePrefab;
+	public GameObject MazeOrSudokuPrefab;
 
     [Header("Post Processing")]
     public VolumeProfile VolumeProfile;

@@ -21,13 +21,11 @@ public class Player : MonoBehaviour
     // Other
 	private static Vector3 respawnPos = Vector3.zero;
     private List<IInteractable> interactables = new();
-    public static Camera CAMERA;
     private static bool hasKeycard = false;
 
     private void Awake()
     {
         // Set intial values and subscribe to correct events
-        CAMERA = transform.Find("Camera").GetComponent<Camera>();
         sanity = maxSanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
         InputManager.MAIN.Character.UseSanityKit.started += UseSanityKit_Started;

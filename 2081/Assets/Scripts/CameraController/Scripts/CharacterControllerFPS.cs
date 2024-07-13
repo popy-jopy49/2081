@@ -59,8 +59,8 @@ public class CharacterControllerFPS : MonoBehaviour {
         if (speed != walkSpeed) return;
         speed = crouchSpeed;
 
-        // Change camera pos and collider to give allusion of crouching
-        Player.CAMERA.transform.localPosition = new Vector3(0f, 0f, 0f);
+		// Change camera pos and collider to give allusion of crouching
+		GameValues.GetCamera().transform.localPosition = new Vector3(0f, 0f, 0f);
         controller.height = 2f;
         controller.center = new Vector3(0, -1, 0);
     }
@@ -75,7 +75,7 @@ public class CharacterControllerFPS : MonoBehaviour {
     {
         // Reset values for speed and collider
         speed = walkSpeed;
-		Player.CAMERA.transform.localPosition = new Vector3(0f, 1.55f, 0f);
+		GameValues.GetCamera().transform.localPosition = new Vector3(0f, 1.55f, 0f);
         controller.height = 4f;
         controller.center = new Vector3(0, 0, 0);
     }

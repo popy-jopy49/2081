@@ -1,20 +1,53 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
+using System;
+using Random = UnityEngine.Random;
 
-public class QTE : MonoBehaviour
+public class QTE : HackPuzzle
 {
+
+	QTE_Bar topBar;
+	QTE_Bar middleBar;
+	QTE_Bar bottomBar;
 
 	private void Awake()
 	{
-		InputManager.MAIN.Character.Interact.started += OnPress;
+		// Find each bar and set the correct values
+		topBar = transform.Find("TopBar").GetComponent<QTE_Bar>();
+		topBar.Setup(Random.Range(GameValues.I.minMoveAmount, GameValues.I.maxMoveAmount), 
+			Random.Range(GameValues.I.minBarWidth, GameValues.I.maxBarWidth));
+		topBar.OnComplete += OnTopComplete;
+
+		middleBar = transform.Find("MiddleBar").GetComponent<QTE_Bar>();
+		middleBar.Setup(Random.Range(GameValues.I.minMoveAmount, GameValues.I.maxMoveAmount),
+			Random.Range(GameValues.I.minBarWidth, GameValues.I.maxBarWidth));
+		middleBar.enabled = false;
+
+		bottomBar = transform.Find("BottomBar").GetComponent<QTE_Bar>();
+		bottomBar.Setup(Random.Range(GameValues.I.minMoveAmount, GameValues.I.maxMoveAmount),
+			Random.Range(GameValues.I.minBarWidth, GameValues.I.maxBarWidth));
+		bottomBar.enabled = false;
 	}
 
-	private void OnPress(InputAction.CallbackContext obj)
+	private void OnTopComplete(object sender, EventArgs e)
 	{
-		// Check if inside zone
+		// Unsubscribe previous one and enable and subscribe to new one
+		middleBar.enabled = true;
+		topBar.OnComplete -= OnTopComplete;
+		middleBar.OnComplete += OnMiddleComplete;
+	}
 
+	private void OnMiddleComplete(object sender, EventArgs e)
+	{
+		// Unsubscribe previous one and enable and subscribe to new one
+		middleBar.OnComplete -= OnMiddleComplete;
+		bottomBar.enabled = true;
+		bottomBar.OnComplete += OnBottomComplete;
+	}
 
-		// Move onto next zone or complete event
+	private void OnBottomComplete(object sender, EventArgs e)
+	{
+		// Unsubscribe bottom one and complete hack
+		bottomBar.OnComplete -= OnBottomComplete;
+		OnPuzzleComplete?.Invoke(this, null);
 	}
 
 }
