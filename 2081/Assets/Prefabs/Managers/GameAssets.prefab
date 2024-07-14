@@ -63,7 +63,8 @@ MonoBehaviour:
     type: 3}
   QTEPrefab: {fileID: 7704821803823367971, guid: 50938d6ff8173c24aac457ecd726dc5a,
     type: 3}
-  SequencePrefab: {fileID: 0}
+  SequencePrefab: {fileID: 6920470975652286676, guid: 7a87ac39d19e26c41b3d13f3da3d3130,
+    type: 3}
   MazeOrSudokuPrefab: {fileID: 0}
   VolumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
   MainMixer: {fileID: 0}
@@ -84,3 +85,5 @@ MonoBehaviour:
   maxMoveAmount: 6
   minBarWidth: 50
   maxBarWidth: 150
+  minNumberOfSequences: 4
+  maxNumberOfSequences: 8

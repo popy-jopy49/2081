@@ -4,6 +4,8 @@ public class Hacking_LockedDoor : Door
 {
 
 	private Transform hackingParent;
+	[SerializeField] private bool debug = true;
+	[SerializeField] private int debugChance = 50;
 
 	protected override void Awake()
 	{
@@ -21,6 +23,8 @@ public class Hacking_LockedDoor : Door
 		int randomChance = Random.Range(0, 100);
 		// Unlock cursor so player can use it
 		Cursor.lockState = CursorLockMode.None;
+		if (debug)
+			randomChance = debugChance;
 
 		// Chance <= 33: Spawn Quick time event puzzle
 		// Chance <= 66: Spawn sequence puzzle
@@ -30,10 +34,15 @@ public class Hacking_LockedDoor : Door
 					GameAssets.I.MazeOrSudokuPrefab), 
 					hackingParent);
 
-		// When the puzzle is complete, open the door and prevent second interaction
-		puzzle.GetComponent<HackPuzzle>().OnPuzzleComplete += (_, _) => {
-			// Relock cursor to centre of screen and hide it
+		puzzle.GetComponent<HackPuzzle>().OnPuzzleComplete += (_, success) => {
+			// Always destroy the puzzle and relock the cursor
+			Destroy(puzzle);
 			Cursor.lockState = CursorLockMode.Locked;
+			// Return if player failed the puzzle
+			if (!success)
+				return;
+
+			// When the puzzle is successfully completed, open the door and prevent second interaction
 			OpenDoor();
 			Destroy(this);
 			// TODO: Play sound after puzzle completion

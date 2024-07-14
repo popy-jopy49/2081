@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class QTE_Bar : MonoBehaviour
 {
 
-	public EventHandler OnComplete;
+	public EventHandler<bool> OnComplete;
 	private float totalQTEWidth = 410f;
 	private float barWidth;
 	private float moveAmount;
@@ -40,10 +40,13 @@ public class QTE_Bar : MonoBehaviour
 	{
 		// Check if outside zone and return
 		if (slider.localPosition.x < barXPos - barWidth || slider.localPosition.x > barXPos + barWidth)
+		{
+			OnComplete?.Invoke(this, false);
 			return;
+		}
 
 		// Move onto next zone or complete event
-		OnComplete?.Invoke(this, null);
+		OnComplete?.Invoke(this, true);
 		enabled = false;
 	}
 

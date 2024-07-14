@@ -10,6 +10,10 @@ public class GameValues : Singleton<GameValues>
 	public float minBarWidth;
 	public float maxBarWidth;
 
+    [Header("Sequence")]
+    public int minNumberOfSequences;
+    public int maxNumberOfSequences;
+
     //[Header("Global Variables")]
     private static Camera CAMERA;
     private static Transform CANVAS;

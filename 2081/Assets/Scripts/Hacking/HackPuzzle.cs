@@ -4,6 +4,6 @@ using UnityEngine;
 public abstract class HackPuzzle : MonoBehaviour
 {
 
-	public EventHandler OnPuzzleComplete;
+	public EventHandler<bool> OnPuzzleComplete;
 
 }

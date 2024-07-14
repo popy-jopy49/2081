@@ -1,4 +1,3 @@
-using System;
 using Random = UnityEngine.Random;
 
 public class QTE : HackPuzzle
@@ -27,27 +26,42 @@ public class QTE : HackPuzzle
 		bottomBar.enabled = false;
 	}
 
-	private void OnTopComplete(object sender, EventArgs e)
+	private void OnTopComplete(object sender, bool success)
 	{
-		// Unsubscribe previous one and enable and subscribe to new one
-		middleBar.enabled = true;
+        if (!success)
+        {
+			OnPuzzleComplete?.Invoke(this, false);
+			return;
+        }
+        // Unsubscribe previous one and enable and subscribe to new one
+        middleBar.enabled = true;
 		topBar.OnComplete -= OnTopComplete;
 		middleBar.OnComplete += OnMiddleComplete;
 	}
 
-	private void OnMiddleComplete(object sender, EventArgs e)
+	private void OnMiddleComplete(object sender, bool success)
 	{
+		if (!success)
+		{
+			OnPuzzleComplete?.Invoke(this, false);
+			return;
+		}
 		// Unsubscribe previous one and enable and subscribe to new one
 		middleBar.OnComplete -= OnMiddleComplete;
 		bottomBar.enabled = true;
 		bottomBar.OnComplete += OnBottomComplete;
 	}
 
-	private void OnBottomComplete(object sender, EventArgs e)
+	private void OnBottomComplete(object sender, bool success)
 	{
+		if (!success)
+		{
+			OnPuzzleComplete?.Invoke(this, false);
+			return;
+		}
 		// Unsubscribe bottom one and complete hack
 		bottomBar.OnComplete -= OnBottomComplete;
-		OnPuzzleComplete?.Invoke(this, null);
+		OnPuzzleComplete?.Invoke(this, true);
 	}
 
 }
