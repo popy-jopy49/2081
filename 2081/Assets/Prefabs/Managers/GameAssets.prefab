@@ -85,5 +85,5 @@ MonoBehaviour:
   maxMoveAmount: 6
   minBarWidth: 50
   maxBarWidth: 150
-  minNumberOfSequences: 4
-  maxNumberOfSequences: 8
+  minNumberOfSequences: 5
+  maxNumberOfSequences: 6

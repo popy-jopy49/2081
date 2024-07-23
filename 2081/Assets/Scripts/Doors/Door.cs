@@ -4,8 +4,8 @@ public class Door : MonoBehaviour, IInteractable
 {
 
 	[SerializeField] protected LayerMask doorButton;
-
 	protected Animator anim;
+    private const float DISTANCE = 10f;
 
 	protected virtual void Awake()
 	{
@@ -25,7 +25,7 @@ public class Door : MonoBehaviour, IInteractable
 		Vector3 pos = GameValues.GetCamera().ScreenToWorldPoint(Vector3.zero);
 
 		// If that ray hits a button and it's parent is this door, call button press function
-		if (!Physics.Raycast(pos, GameValues.GetCamera().transform.forward, out RaycastHit hitInfo, 10f, doorButton))
+		if (!Physics.Raycast(pos, GameValues.GetCamera().transform.forward, out RaycastHit hitInfo, DISTANCE, doorButton))
 			return false;
 
 		if (hitInfo.transform.parent != transform)

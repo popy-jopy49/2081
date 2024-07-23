@@ -11,7 +11,11 @@ public class Sequence : HackPuzzle
 	private int index = 0;
 	private bool showingSequence = true;
 
-	private void Awake()
+    private const float FULL_A = 1f;
+    private const float FADED_A = 100f / 255f;
+    private const int ONE_SECOND = 1000;
+
+    private void Awake()
 	{
 		buttons = transform.Find("Buttons").GetComponentsInChildren<Image>();
 		// Generate random sequence
@@ -27,7 +31,7 @@ public class Sequence : HackPuzzle
 	private async void ShowSequence()
 	{
 		// Wait a second
-		await Task.Delay(1000);
+		await Task.Delay(ONE_SECOND);
 		
 		// Loop over each item in the sequence
 		for (int i = 0;	i < sequence.Length; i++)
@@ -35,19 +39,19 @@ public class Sequence : HackPuzzle
 			int buttonIDX = Parse.Int(sequence[i].ToString());
 			// Set image to lighter colour
 			Color col = buttons[buttonIDX].color;
-			col.a = 1f;
+			col.a = FULL_A;
 			buttons[buttonIDX].color = col;
 			// TODO: Play sequence sound
 
 			// Wait 1 second
-			await Task.Delay(1000);
+			await Task.Delay(ONE_SECOND);
 
 			// Set image to regular colour
-			col.a = 100f / 255f;
+			col.a = FADED_A;
 			buttons[buttonIDX].color = col;
 
 			//Wait 1 second
-			await Task.Delay(1000);
+			await Task.Delay(ONE_SECOND);
 		}
 
 		showingSequence = false;
