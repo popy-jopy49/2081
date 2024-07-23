@@ -291,7 +291,7 @@ public partial class @Main: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""afe60fb6-71de-43c3-aee7-26f62482105d"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -359,7 +359,7 @@ public partial class @Main: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9ddaa823-4400-4631-9b82-cccaf39fc988"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -381,7 +381,7 @@ public partial class @Main: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""47c6f814-1512-4a19-b7c1-2c780ddda7cd"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
