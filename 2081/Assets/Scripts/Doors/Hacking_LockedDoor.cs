@@ -29,8 +29,8 @@ public class Hacking_LockedDoor : Door
 		// Chance <= 33: Spawn Quick time event puzzle
 		// Chance <= 66: Spawn sequence puzzle
 		// Otherwise: spawn maze or sudoky puzzle and make hacking parent the parent
-		GameObject puzzle = Instantiate(randomChance <= 33 ? GameAssets.I.QTEPrefab :
-					(randomChance <= 66 ? GameAssets.I.SequencePrefab :
+		GameObject puzzle = Instantiate(randomChance <= 50 ? GameAssets.I.QTEPrefab :
+					(randomChance <= 100 ? GameAssets.I.SequencePrefab :
 					GameAssets.I.MazeOrSudokuPrefab), 
 					hackingParent);
 
