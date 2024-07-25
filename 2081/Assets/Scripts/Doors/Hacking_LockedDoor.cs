@@ -40,7 +40,10 @@ public class Hacking_LockedDoor : Door
 			Cursor.lockState = CursorLockMode.Locked;
 			// Return if player failed the puzzle
 			if (!success)
-				return;
+			{
+
+                return;
+            }
 
 			// When the puzzle is successfully completed, open the door and prevent second interaction
 			OpenDoor();
