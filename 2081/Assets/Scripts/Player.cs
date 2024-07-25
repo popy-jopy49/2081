@@ -111,6 +111,11 @@ public class Player : MonoBehaviour
         OnInteractablesChange?.Invoke(this, interactables.Count);
     }
 
+    public static void DecreaseSanity(float amount)
+    {
+        //sanity
+    }
+
     // Increase sanity kit count by 1 and update UI
     public static void AddSanityKit()
     {
