@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,18 +12,18 @@ public class FlashingLight : MonoBehaviour
     private void Awake()
     {
         lightComponents = GetComponentsInChildren<Light>();
-        Flicker();
+        StartCoroutine(Flicker());
     }
 
-    private async void Flicker()
+    private IEnumerator Flicker()
     {
         while (true)
         {
             Array.ForEach(lightComponents, light => light.enabled = true );
-            await Task.Delay((int)(1000 * curve.Evaluate(Random.Range(0f, 1f))));
+            yield return new WaitForSeconds(curve.Evaluate(Random.Range(0f, 1f)));
             Array.ForEach(lightComponents, light => light.enabled = false);
-            await Task.Delay((int)(1000 * curve.Evaluate(Random.Range(0f, 1f))));
-        }
+			yield return new WaitForSeconds(curve.Evaluate(Random.Range(0f, 1f)));
+		}
     }
 
 }

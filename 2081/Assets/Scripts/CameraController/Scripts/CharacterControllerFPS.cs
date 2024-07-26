@@ -73,6 +73,9 @@ public class CharacterControllerFPS : MonoBehaviour {
 
     private void Walk(InputAction.CallbackContext ctx)
     {
+        // Bound check to see if we must keep crouching
+        if (Physics.Raycast(transform.position, transform.up, 0.99f, whatIsGround))
+            return;
         // Reset values for speed and collider
         speed = walkSpeed;
 		GameValues.GetCamera().transform.localPosition = new Vector3(0f, 1.55f, 0f);
@@ -103,8 +106,9 @@ public class CharacterControllerFPS : MonoBehaviour {
             currentEnergy -= jumpEnergy;
 		}
 
-        // Move the player first with movement and then with jump
-        controller.Move(speed * Time.deltaTime * move);
+        Physics.SyncTransforms();
+		// Move the player first with movement and then with jump
+		controller.Move(speed * Time.deltaTime * move);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 

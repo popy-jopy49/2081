@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
 
 namespace Michsky.UI.Heat
 {
@@ -12,6 +13,8 @@ namespace Michsky.UI.Heat
         public Animator splashScreen;
         [SerializeField] private GameObject mainContent;
         [SerializeField] private ImageFading initPanel;
+        [SerializeField] private VideoPlayer introVideoPlayer;
+        [SerializeField] private GameObject introImage;
 
         // Helpers
         float splashInTime;
@@ -41,6 +44,7 @@ namespace Michsky.UI.Heat
 
         void Initialize()
         {
+            introVideoPlayer.Play();
             if (UIManagerAsset == null || mainContent == null)
             {
                 Debug.LogError("<b>[Heat UI]</b> Cannot initialize the resources due to missing resources.", this);
@@ -56,49 +60,55 @@ namespace Michsky.UI.Heat
                 enableSplashAfter = true;
             }
 
-            if (UIManagerAsset.enableSplashScreen)
-            {
-                if (splashScreen == null)
-                {
-                    Debug.LogError("<b>[Heat UI]</b> Splash Screen is enabled but its resource is missing. Please assign the correct variable for 'Splash Screen'.", this);
-                    return;
-                }
-
-                // Getting in and out animation length
-                AnimationClip[] clips = splashScreen.runtimeAnimatorController.animationClips;
-                splashInTime = clips[0].length;
-                splashOutTime = clips[1].length;
-
-                splashScreen.enabled = true;
-                splashScreen.gameObject.SetActive(true);
-                StartCoroutine("DisableSplashScreenAnimator");
-
-                if (UIManagerAsset.showSplashScreenOnce)
-                {
-                    GameObject tempHelper = new GameObject();
-                    tempHelper.name = "[Heat UI - Splash Screen Helper]";
-                    DontDestroyOnLoad(tempHelper);
-                }
-            }
-
-            else
-            {
-                if (mainContent == null)
-                {
-                    Debug.LogError("<b>[Heat UI]</b> 'Main Panels' is missing. Please assign the correct variable for 'Main Panels'.", this);
-                    return;
-                }
-
-                if (splashScreen != null) { splashScreen.gameObject.SetActive(false); }
-                mainContent.gameObject.SetActive(false);
-                StartCoroutine("FinalizeSplashScreen");
-            }
-
-            if (enableSplashAfter && UIManagerAsset.showSplashScreenOnce)
-            {
-                UIManagerAsset.enableSplashScreen = true;
-            }
+            // Start video
+            introVideoPlayer.loopPointReached += (_) => { Destroy(introImage); FinishInitialise(enableSplashAfter); };
         }
+
+        void FinishInitialise(bool enableSplashAfter)
+		{
+			if (UIManagerAsset.enableSplashScreen)
+			{
+				if (splashScreen == null)
+				{
+					Debug.LogError("<b>[Heat UI]</b> Splash Screen is enabled but its resource is missing. Please assign the correct variable for 'Splash Screen'.", this);
+					return;
+				}
+
+				// Getting in and out animation length
+				AnimationClip[] clips = splashScreen.runtimeAnimatorController.animationClips;
+				splashInTime = clips[0].length;
+				splashOutTime = clips[1].length;
+
+				splashScreen.enabled = true;
+				splashScreen.gameObject.SetActive(true);
+				StartCoroutine("DisableSplashScreenAnimator");
+
+				if (UIManagerAsset.showSplashScreenOnce)
+				{
+					GameObject tempHelper = new GameObject();
+					tempHelper.name = "[Heat UI - Splash Screen Helper]";
+					DontDestroyOnLoad(tempHelper);
+				}
+			}
+
+			else
+			{
+				if (mainContent == null)
+				{
+					Debug.LogError("<b>[Heat UI]</b> 'Main Panels' is missing. Please assign the correct variable for 'Main Panels'.", this);
+					return;
+				}
+
+				if (splashScreen != null) { splashScreen.gameObject.SetActive(false); }
+				mainContent.gameObject.SetActive(false);
+				StartCoroutine("FinalizeSplashScreen");
+			}
+
+			if (enableSplashAfter && UIManagerAsset.showSplashScreenOnce)
+			{
+				UIManagerAsset.enableSplashScreen = true;
+			}
+		}
 
         IEnumerator StartInitialize()
         {

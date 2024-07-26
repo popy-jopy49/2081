@@ -20,70 +20,46 @@ MonoBehaviour:
   - headerTitle: Created by
     headerTitleKey: CreditsCreatedBy
     items:
-    - Team Michsky
+    - Raad Abuhijleh
+    - William Rattenbury
+    - Ben Larom
+    - Sam Wright
   - headerTitle: Art Design
     headerTitleKey: CreditsArtDesign
     items:
-    - Mariyah Gaines
-    - Ralphy Griffin
-    - Ricky Broughton
-    - Selena Crouch
-    - Felix Corbett
+    - Ben Larom
+    - Raad Abuhijleh
   - headerTitle: Programming
     headerTitleKey: CreditsProgrammer
     items:
-    - Teo Cohen
-    - Kezia Bush
-    - Darsh Stokes
+    - Sam Wright
+    - Raad Abuhijleh
   - headerTitle: Sound Design
     headerTitleKey: CreditsSoundDesign
     items:
-    - Thomas Beaumont
-    - Lily-Anne Taylor
+    - Ben Larom
   - headerTitle: Concept Artist
     headerTitleKey: CreditsConceptArtist
     items:
-    - Madeline Xiong
-  - headerTitle: VFX Artist
-    headerTitleKey: CreditsVFXArtist
+    - Raad Abuhijleh
+    - William Rattenbury
+  - headerTitle: 3D Models
+    headerTitleKey: CreditsPlaytesters
     items:
-    - Cassian Wilcox
-    - Nylah Sykes
+    - Ben Larom
+    - William Rattenbury
   - headerTitle: Voiceover
     headerTitleKey: CreditsVoiceover
     items:
-    - Willie Lawson
-    - Lorena Lozano
-    - Jonny Allen
-    - Keagan Guest
+    - Raad Abuhijleh
   - headerTitle: User Interface
-    headerTitleKey: CreditsUI
+    headerTitleKey: CreditsUserInterface
     items:
-    - Bobby Gray
-  - headerTitle: Playtesters
-    headerTitleKey: CreditsPlaytesters
-    items:
-    - Alberto Ewing
-    - Leonidas West
-    - Gary Alcock
-    - Erika Frey
-    - Gloria Fulton
+    - Sam Wright
   mentions:
-  - ID: Logo Placeholder
-    icon: {fileID: 21300000, guid: 6c6acdf7b632b1647b8e847aa5e8a59e, type: 3}
-    description: 'Optional footnote goes here.
-
-      You can add additional information
-      or license details here.'
-    descriptionKey: CreditsLogoDescription
-    descriptionSpacing: 30
-    layoutSpacing: 160
-  - ID: Logo Placeholder 2
-    icon: {fileID: 21300000, guid: 78ca0ac98a59e2d49a61da6d805033a7, type: 3}
-    description: 'Optional footnote goes here.
-
-      You can add additional information
-      or license details here.'
+  - ID: RSIOKSCombined Logo
+    icon: {fileID: 21300000, guid: b9c70a0f7dff2a444abecd9a8c36d9f9, type: 3}
+    description: A Redstar Interactive and OKStudios game
     descriptionKey: CreditsLogoDescription
     descriptionSpacing: 30
     layoutSpacing: 160

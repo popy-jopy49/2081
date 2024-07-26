@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4987353004479425258}
   - component: {fileID: 8572413541622425430}
   - component: {fileID: 2818620393465625185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 4WayTunnel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

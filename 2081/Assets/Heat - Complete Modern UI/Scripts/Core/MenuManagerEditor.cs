@@ -26,14 +26,18 @@ namespace Michsky.UI.Heat
             var splashScreen = serializedObject.FindProperty("splashScreen");
             var mainContent = serializedObject.FindProperty("mainContent");
             var initPanel = serializedObject.FindProperty("initPanel");
+            var introVideoPlayer = serializedObject.FindProperty("introVideoPlayer");
+            var introImage = serializedObject.FindProperty("introImage");
 
-            HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+			HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(UIManagerAsset, customSkin, "UI Manager");
             HeatUIEditorHandler.DrawProperty(splashScreen, customSkin, "Splash Screen");
             HeatUIEditorHandler.DrawProperty(mainContent, customSkin, "Main Content");
-            HeatUIEditorHandler.DrawProperty(initPanel, customSkin, "Init Screen");
+			HeatUIEditorHandler.DrawProperty(initPanel, customSkin, "Init Screen");
+			HeatUIEditorHandler.DrawProperty(introVideoPlayer, customSkin, "Intro Video Player");
+			HeatUIEditorHandler.DrawProperty(introImage, customSkin, "Intro Image");
 
-            if (mmTarget.UIManagerAsset != null)
+			if (mmTarget.UIManagerAsset != null)
             {
                 HeatUIEditorHandler.DrawHeader(customSkin, "Options Header", 10);
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);

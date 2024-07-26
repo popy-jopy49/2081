@@ -1,9 +1,10 @@
+using SWAssets;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
 
     // Events
@@ -13,13 +14,16 @@ public class Player : MonoBehaviour
 
     // Sanity values
     [SerializeField] private float maxSanity = 20f;
+    [SerializeField] private float sanityLostOnFailure = 5f;
+    [SerializeField] private float sanityWonOnWin = 3f;
+    [SerializeField] private float sanityLostAroundLight = 0.5f;
     [SerializeField] private float maxSanityIncrease = 4f;
     [SerializeField] private bool debug = true;
     private static int sanityKits = 3;
 	private float sanity = 0;
 
     // Other
-	private static Vector3 respawnPos = Vector3.zero;
+	private Vector3 respawnPos = Vector3.zero;
     private List<IInteractable> interactables = new();
     private static bool hasKeycard = false;
 
@@ -42,14 +46,21 @@ public class Player : MonoBehaviour
 		{
 			interactables.RemoveAt(0);
             OnInteractablesChange?.Invoke(this, interactables.Count);
-			// TODO: Play success sound
+            // TODO: Play success sound
+
+            //Add sanity
+            AddSanity(sanityWonOnWin);
 		}
 		else
         {
             // TODO: Play failure sound
+
+            // Remove sanity
+            DecreaseSanity(sanityLostOnFailure);
         }
     }
 
+#if UNITY_EDITOR
     private void Update()
     {
         // DEBUG: test to see sanity work and sanity kits
@@ -59,13 +70,16 @@ public class Player : MonoBehaviour
             OnSanityChanged?.Invoke(null, (sanity, maxSanity));
         }
     }
+#endif
 
     private void OnSanityChange(object sender, (float c, float m) sanity)
     {
         if (sanity.c > 0)
             return;
+        print("Dead");
         // Respawn at position if sanity reaches 0
         transform.position = respawnPos;
+        this.sanity = maxSanity;
     }
 
     private void UseSanityKit_Started(InputAction.CallbackContext obj)
@@ -95,6 +109,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (!other.TryGetComponent(out IInteractable pickupable)) return;
 
 		// Add interactable to list of nearby interactables and update UI
@@ -102,7 +117,16 @@ public class Player : MonoBehaviour
         OnInteractablesChange?.Invoke(this, interactables.Count);
     }
 
-    private void OnTriggerExit(Collider other)
+	private void OnTriggerStay(Collider other)
+	{
+        if (!other.TryGetComponent(out FlashingLight fl))
+            return;
+
+        // Decrease sanity for every frame around the flickering light
+		DecreaseSanity(sanityLostAroundLight);
+	}
+
+	private void OnTriggerExit(Collider other)
     {
         if (!other.TryGetComponent(out IInteractable pickupable)) return;
 
@@ -111,7 +135,7 @@ public class Player : MonoBehaviour
         OnInteractablesChange?.Invoke(this, interactables.Count);
     }
 
-    public static void DecreaseSanity(float amount)
+    public void DecreaseSanity(float amount)
     {
         //sanity
     }
@@ -124,7 +148,7 @@ public class Player : MonoBehaviour
     }
 
     // Set respawn position to last checkpoint position
-    public static void SetLatestCheckpoint(Vector3 pos)
+    public void SetLatestCheckpoint(Vector3 pos)
     {
         respawnPos = pos;
     }

@@ -311,9 +311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff83b8bdecf26146860db3eea90094f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 0
   maxSanity: 20
+  sanityLostOnFailure: 5
+  sanityWonOnWin: 3
   maxSanityIncrease: 4
-  debug: 1
+  debug: 0
 --- !u!1 &8002895473425561357
 GameObject:
   m_ObjectHideFlags: 0

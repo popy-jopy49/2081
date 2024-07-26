@@ -977,7 +977,7 @@ MonoBehaviour:
   doorButton:
     serializedVersion: 2
     m_Bits: 128
-  debug: 1
+  debug: 0
   debugChance: 20
 --- !u!1 &6461086616834567087
 GameObject:

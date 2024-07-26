@@ -1,22 +1,24 @@
+using Michsky.UI.Heat;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SanityBar : MonoBehaviour
 {
 
-    private Slider slider;
+    private ProgressBar slider;
 
     private void Awake()
     {
         // Get Slider UI and call function when sanity is changed
-        slider = GetComponent<Slider>();
+        slider = GetComponent<ProgressBar>();
         Player.OnSanityChanged += OnSanityChanged;
     }
 
     private void OnSanityChanged(object sender, (float current, float max) sanity)
-    {
-        // Normalise sanity and set UI value
-        slider.value = sanity.current / sanity.max;
-    }
+	{
+		// Set UI values
+		slider.maxValueLimit = sanity.max;
+		slider.maxValue = sanity.max;
+		slider.currentValue = sanity.current;
+	}
 
 }
