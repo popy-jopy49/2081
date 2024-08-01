@@ -53,7 +53,7 @@ MonoBehaviour:
   menuCursorState: 0
   gameCursorState: 1
   menuCursorVisibility: 2
-  gameCursorVisibility: 0
+  gameCursorVisibility: 1
   hotkey:
     m_Name: Hotkey
     m_Type: 0

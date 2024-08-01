@@ -14,7 +14,7 @@ public class MazeController : MonoBehaviour, IDragHandler
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		/*// Grab mous input
+		/*// Grab mouse input
 		//Vector2 mousePos = InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>();
 		//mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 

@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using SWAssets.Utils;
+using System.Collections;
 
 public class Sequence : HackPuzzle
 {
@@ -13,7 +14,7 @@ public class Sequence : HackPuzzle
 
     private const float FULL_A = 1f;
     private const float FADED_A = 100f / 255f;
-    private const int ONE_SECOND = 1000;
+    private const float ONE_SECOND = 1f;
 
     private void Awake()
 	{
@@ -25,13 +26,13 @@ public class Sequence : HackPuzzle
 			sequence += Random.Range(0, buttons.Length);
 		}
 		// Show sequence to player
-		ShowSequence();
+		StartCoroutine(ShowSequence());
 	}
 
-	private async void ShowSequence()
+	private IEnumerator ShowSequence()
 	{
 		// Wait a second
-		await Task.Delay(ONE_SECOND);
+		yield return new WaitForSeconds(ONE_SECOND);
 		
 		// Loop over each item in the sequence
 		for (int i = 0;	i < sequence.Length; i++)
@@ -41,18 +42,18 @@ public class Sequence : HackPuzzle
 			Color col = buttons[buttonIDX].color;
 			col.a = FULL_A;
 			buttons[buttonIDX].color = col;
-			// TODO: Play sequence sound
+            // TODO: Play sequence sound
 
-			// Wait 1 second
-			await Task.Delay(ONE_SECOND);
+            // Wait 1 second
+            yield return new WaitForSeconds(ONE_SECOND);
 
-			// Set image to regular colour
-			col.a = FADED_A;
+            // Set image to regular colour
+            col.a = FADED_A;
 			buttons[buttonIDX].color = col;
 
-			//Wait 1 second
-			await Task.Delay(ONE_SECOND);
-		}
+            //Wait 1 second
+            yield return new WaitForSeconds(ONE_SECOND);
+        }
 
 		showingSequence = false;
 	}

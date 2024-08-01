@@ -29,10 +29,6 @@ namespace Michsky.UI.Heat
 
             var setTimeScale = serializedObject.FindProperty("setTimeScale");
             var inputBlockDuration = serializedObject.FindProperty("inputBlockDuration");
-            var menuCursorState = serializedObject.FindProperty("menuCursorState");
-            var gameCursorState = serializedObject.FindProperty("gameCursorState");
-            var menuCursorVisibility = serializedObject.FindProperty("menuCursorVisibility");
-            var gameCursorVisibility = serializedObject.FindProperty("gameCursorVisibility");
             var hotkey = serializedObject.FindProperty("hotkey");
 
             var onOpen = serializedObject.FindProperty("onOpen");
@@ -71,10 +67,6 @@ namespace Michsky.UI.Heat
             HeatUIEditorHandler.DrawHeader(customSkin, "Options Header", 10);
             setTimeScale.boolValue = HeatUIEditorHandler.DrawToggle(setTimeScale.boolValue, customSkin, "Set Time Scale", "Sets the time scale depending on the pause menu state.");
             HeatUIEditorHandler.DrawPropertyCW(inputBlockDuration, customSkin, "Input Block Duration", "Block input in specific amount of time to provide smooth visuals.", 140);
-            HeatUIEditorHandler.DrawPropertyCW(menuCursorState, customSkin, "Menu Cursor State", 140);
-            HeatUIEditorHandler.DrawPropertyCW(menuCursorVisibility, customSkin, "Menu Cursor Visibility", 140);
-            HeatUIEditorHandler.DrawPropertyCW(gameCursorState, customSkin, "Game Cursor State", 140);
-            HeatUIEditorHandler.DrawPropertyCW(gameCursorVisibility, customSkin, "Game Cursor Visibility", 140);
             EditorGUILayout.PropertyField(hotkey, new GUIContent("Hotkey"), true);
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Events Header", 10);

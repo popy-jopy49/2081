@@ -2,7 +2,6 @@
 using UnityEngine.Audio;
 using SWAssets;
 using UnityEngine.Rendering;
-using System.Collections.Generic;
 
 public class GameAssets : Singleton<GameAssets> {
 

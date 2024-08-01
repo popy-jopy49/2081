@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SanityKit : MonoBehaviour, IInteractable
+public class SanityKitO : MonoBehaviour, IInteractable
 {
 
     // Add a sanity kit to the player's count on pickup

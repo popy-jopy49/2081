@@ -6,7 +6,7 @@ public class MouseLook : MonoBehaviour {
 	[SerializeField] private Transform player;
     private float xRotation;
 
-	void Start()
+	void Awake()
 	{
         // Lock cursor to the screen and hide it
 		Cursor.lockState = CursorLockMode.Locked;

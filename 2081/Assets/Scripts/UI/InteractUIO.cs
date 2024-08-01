@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractUI : MonoBehaviour
+public class InteractUIO : MonoBehaviour
 {
 
     GameObject child;
