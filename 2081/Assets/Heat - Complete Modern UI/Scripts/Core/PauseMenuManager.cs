@@ -81,16 +81,16 @@ namespace Michsky.UI.Heat
 
             FadeInBackground();
 
-            Cursor.lockState = GameValues.I.MenuCursorState;
-
-            if (GameValues.I.MenuCursorVisibility == GameValues.CursorVisibility.Visible) { Cursor.visible = true; }
-            else if (GameValues.I.MenuCursorVisibility != GameValues.CursorVisibility.Default) { Cursor.visible = false; }
-
             if (continueButton != null && Gamepad.current != null)
             {
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
             }
+
+            Cursor.lockState = GameValues.I.MenuCursorState;
+
+            if (GameValues.I.MenuCursorVisibility == GameValues.CursorVisibility.Visible) { Cursor.visible = true; }
+            else if (GameValues.I.MenuCursorVisibility != GameValues.CursorVisibility.Default) { Cursor.visible = false; }
         }
 
         public void ClosePauseMenu()
@@ -102,14 +102,18 @@ namespace Michsky.UI.Heat
             StopCoroutine("DisablePauseCanvas");
             StartCoroutine("DisablePauseCanvas");
 
-            // If In puzzle, don't go game
-            if (GameValues.I.GameCursorVisibility == GameValues.CursorVisibility.Visible) { Cursor.visible = true; }
-            else if (GameValues.I.GameCursorVisibility != GameValues.CursorVisibility.Default) { Cursor.visible = false; }
 
             isOn = false;
             onClose.Invoke();
 
             FadeOutBackground();
+
+            // If In puzzle, don't go game
+            if (GameValues.IN_PUZZLE)
+                return;
+
+            if (GameValues.I.GameCursorVisibility == GameValues.CursorVisibility.Visible) { Cursor.visible = true; }
+            else if (GameValues.I.GameCursorVisibility != GameValues.CursorVisibility.Default) { Cursor.visible = false; }
 
             Cursor.lockState = GameValues.I.GameCursorState;
         }

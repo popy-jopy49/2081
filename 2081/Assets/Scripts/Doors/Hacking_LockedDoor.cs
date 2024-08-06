@@ -21,10 +21,14 @@ public class Hacking_LockedDoor : Door
 
 		// Have 1 in 3 chance of getting each minigame
 		int randomChance = Random.Range(0, 100);
-        // Unlock cursor so player can use it
+        
+		// Unlock cursor so player can use it
         Cursor.lockState = GameValues.I.MenuCursorState;
         if (GameValues.I.MenuCursorVisibility == GameValues.CursorVisibility.Visible) { Cursor.visible = true; }
         else if (GameValues.I.MenuCursorVisibility != GameValues.CursorVisibility.Default) { Cursor.visible = false; }
+
+        GameValues.IN_PUZZLE = true;
+
         if (debug)
 			randomChance = debugChance;
 
@@ -36,7 +40,6 @@ public class Hacking_LockedDoor : Door
 					GameAssets.I.MazeOrSudokuPrefab), 
 					hackingParent);
 
-		GameValues.IN_PUZZLE = true;
 		puzzle.GetComponent<HackPuzzle>().OnPuzzleComplete += (_, success) => {
             // Always destroy the puzzle and relock the cursor
             GameValues.IN_PUZZLE = false;

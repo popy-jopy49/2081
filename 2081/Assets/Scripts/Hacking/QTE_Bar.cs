@@ -23,7 +23,7 @@ public class QTE_Bar : MonoBehaviour
 		// Setup bar
 		bar = transform.Find("Bar").GetComponent<RectTransform>();
 		// Set size difference to the remaining amount to get to the desired size
-		bar.sizeDelta = new Vector2(barWidth - bar.rect.width, 0);
+		bar.sizeDelta = new Vector2(barWidth, 0);
 		// Random between left extent + width of bar and right extent - width of bar
 		barXPos = Random.Range(-totalQTEWidth + barWidth, totalQTEWidth - barWidth);
 		bar.localPosition = new Vector2(barXPos, 0);
@@ -36,10 +36,20 @@ public class QTE_Bar : MonoBehaviour
 		InputManager.MAIN.Character.Interact.started += OnPress;
 	}
 
-	private void OnPress(InputAction.CallbackContext obj)
-	{
-		// Check if outside zone and return
-		if (slider.localPosition.x < barXPos - barWidth || slider.localPosition.x > barXPos + barWidth)
+    private void OnDestroy()
+    {
+        InputManager.MAIN.Character.Interact.started -= OnPress;
+    }
+
+    private void OnPress(InputAction.CallbackContext obj)
+    {
+		// If it is not this bar's time, don't call this function
+		if (!this.enabled)
+			return;
+		print(name);
+
+        // Check if outside zone and return
+        if (slider.localPosition.x < barXPos - barWidth || slider.localPosition.x > barXPos + barWidth)
 		{
 			OnComplete?.Invoke(this, false);
 			return;
