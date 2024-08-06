@@ -33,10 +33,14 @@ public class QTE_Bar : MonoBehaviour
 	{
 		// Find slider and subscribe to input
 		slider = transform.Find("Slider").GetComponent<RectTransform>();
-		InputManager.MAIN.Character.Interact.started += OnPress;
 	}
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        InputManager.MAIN.Character.Interact.started += OnPress;
+    }
+
+    private void OnDisable()
     {
         InputManager.MAIN.Character.Interact.started -= OnPress;
     }
@@ -44,12 +48,11 @@ public class QTE_Bar : MonoBehaviour
     private void OnPress(InputAction.CallbackContext obj)
     {
 		// If it is not this bar's time, don't call this function
-		if (!this.enabled)
+		if (!enabled)
 			return;
-		print(name);
 
         // Check if outside zone and return
-        if (slider.localPosition.x < barXPos - barWidth || slider.localPosition.x > barXPos + barWidth)
+        if (slider.localPosition.x < barXPos - barWidth/2 || slider.localPosition.x > barXPos + barWidth/2)
 		{
 			OnComplete?.Invoke(this, false);
 			return;
