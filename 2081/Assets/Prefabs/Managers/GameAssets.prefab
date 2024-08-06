@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
-  minMoveAmount: 3
-  maxMoveAmount: 6
+  minMoveAmount: 1
+  maxMoveAmount: 3
   minBarWidth: 50
   maxBarWidth: 150
   minNumberOfSequences: 5
