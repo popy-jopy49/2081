@@ -13,6 +13,7 @@ public class CharacterControllerFPS : MonoBehaviour {
     [SerializeField] private float sprintSpeed = 25f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 3f;
+    private Vector3 moveOffset;
 
     // Ground Checking
     [SerializeField] private Transform groundCheck;
@@ -108,7 +109,7 @@ public class CharacterControllerFPS : MonoBehaviour {
 
         Physics.SyncTransforms();
 		// Move the player first with movement and then with jump
-		controller.Move(speed * Time.deltaTime * move);
+		controller.Move((speed * Time.deltaTime * move) + moveOffset);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
@@ -128,5 +129,7 @@ public class CharacterControllerFPS : MonoBehaviour {
         // Update UI
         OnEnergyChanged?.Invoke(this, (currentEnergy, maxEnergy));
     }
+
+    public void AddMoveOffset(Vector3 moveDir) => moveOffset = moveDir;
 
 }
