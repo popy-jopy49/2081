@@ -18,7 +18,7 @@ public class Sequence : HackPuzzle
 
     private void Awake()
 	{
-		buttons = transform.Find("Buttons").GetComponentsInChildren<Image>();
+		buttons = transform.Find("SequenceBackground").Find("Buttons").GetComponentsInChildren<Image>();
 		// Generate random sequence
 		int numOfSequences = Random.Range(GameValues.I.minNumberOfSequences, GameValues.I.maxNumberOfSequences);
 		for (int i = 0; i < numOfSequences; i++)

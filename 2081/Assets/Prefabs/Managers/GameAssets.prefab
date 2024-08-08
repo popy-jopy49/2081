@@ -67,7 +67,13 @@ MonoBehaviour:
     type: 3}
   MazePrefab: {fileID: 955784384864218661, guid: 043fe288dc7b8b44087c4502a60f2383,
     type: 3}
-  MazeFiles: []
+  MazeFiles:
+  - obj: MazeBinary1.txt
+    chance: 25
+  - obj: MazeBinary2.txt
+    chance: 25
+  - obj: MazeBinary3.txt
+    chance: 25
   VolumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
   MainMixer: {fileID: 0}
 --- !u!114 &8896241604751481481

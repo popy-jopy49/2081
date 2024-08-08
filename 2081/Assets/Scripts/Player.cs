@@ -37,6 +37,11 @@ public class Player : Singleton<Player>
         OnSanityChanged += OnSanityChange;
     }
 
+    private void Start()
+    {
+        PuzzleGrid.Setup(GameAssets.I.MazePrefab, GameAssets.I.MazeFiles, () => print("You Win!"));
+    }
+
     private void Interact_Started(InputAction.CallbackContext obj)
     {
         // If interactables nearby, call OnInteract();

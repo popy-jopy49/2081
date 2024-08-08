@@ -1,4 +1,5 @@
 using Random = UnityEngine.Random;
+using UnityEngine;
 
 public class QTE : HackPuzzle
 {
@@ -9,18 +10,21 @@ public class QTE : HackPuzzle
 
 	private void Awake()
 	{
+		//Find background
+		Transform background = transform.Find("Background");
+
 		// Find each bar and set the correct values
-		topBar = transform.Find("TopBar").GetComponent<QTE_Bar>();
+		topBar = background.Find("TopBar").GetComponent<QTE_Bar>();
 		topBar.Setup(Random.Range(GameValues.I.minMoveAmount, GameValues.I.maxMoveAmount), 
 			Random.Range(GameValues.I.minBarWidth, GameValues.I.maxBarWidth));
 		topBar.OnComplete += OnTopComplete;
 
-		middleBar = transform.Find("MiddleBar").GetComponent<QTE_Bar>();
+		middleBar = background.Find("MiddleBar").GetComponent<QTE_Bar>();
 		middleBar.Setup(Random.Range(GameValues.I.minMoveAmount, GameValues.I.maxMoveAmount),
 			Random.Range(GameValues.I.minBarWidth, GameValues.I.maxBarWidth));
 		middleBar.enabled = false;
 
-		bottomBar = transform.Find("BottomBar").GetComponent<QTE_Bar>();
+		bottomBar = background.Find("BottomBar").GetComponent<QTE_Bar>();
 		bottomBar.Setup(Random.Range(GameValues.I.minMoveAmount, GameValues.I.maxMoveAmount),
 			Random.Range(GameValues.I.minBarWidth, GameValues.I.maxBarWidth));
 		bottomBar.enabled = false;

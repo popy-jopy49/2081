@@ -30,9 +30,8 @@ public class GameAssets : Singleton<GameAssets> {
         public float chance;
     }
 
-    public T GetRandomPrefab<T>(PrefabData<T>[] prefabDatas, out int index)
+    public T GetRandomPrefab<T>(PrefabData<T>[] prefabDatas)
     {
-        index = 0;
         float totalSpawnChance = 0f;
         foreach (PrefabData<T> enemyPrefabData in prefabDatas)
         {
@@ -44,24 +43,17 @@ public class GameAssets : Singleton<GameAssets> {
 
         // Find the first gameobject that has the chance
         T selectedEnemyPrefab = default;
-        for (int i = 0; i < prefabDatas.Length; i++)
+        foreach (PrefabData<T> prefabData in prefabDatas)
         {
-            PrefabData<T> enemyData = prefabDatas[i];
-            if (randomValue < enemyData.chance)
+            if (randomValue < prefabData.chance)
             {
-                selectedEnemyPrefab = enemyData.obj;
-                index = i;
+                selectedEnemyPrefab = prefabData.obj;
                 break;
             }
-            randomValue -= enemyData.chance;
+            randomValue -= prefabData.chance;
         }
 
         return selectedEnemyPrefab;
-    }
-
-    public T GetRandomPrefab<T>(PrefabData<T>[] prefabDatas)
-    {
-        return GetRandomPrefab(prefabDatas, out int _);
     }
 
 }

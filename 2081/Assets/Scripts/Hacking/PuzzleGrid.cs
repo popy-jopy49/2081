@@ -9,7 +9,6 @@ public class PuzzleGrid : MonoBehaviour
     [SerializeField] private Vector2 gridSize;
     [SerializeField] private Vector2 gridObjectSize;
     private string fileName = "";
-    [SerializeField] private Transform parent;
     [SerializeField] private TextPrefabDigit[] textPrefabDigits;
     private Vector2 gridOffset;
 
@@ -19,8 +18,8 @@ public class PuzzleGrid : MonoBehaviour
     // Global static function to instantiate new grid
     public static PuzzleGrid Setup(Transform prefab, GameAssets.PrefabData<string>[] files, Action winFunc)
     {
-        PuzzleGrid grid = Instantiate(prefab, Camera.main.transform.Find("Puzzles")).Find("Grid").GetComponent<PuzzleGrid>();
-        grid.fileName = GameAssets.I.GetRandomPrefab(files, out int index);
+        PuzzleGrid grid = Instantiate(prefab, GameValues.GetCanvas().Find("HackingGameParent")).Find("MazeBackground").Find("Grid").GetComponent<PuzzleGrid>();
+        grid.fileName = GameAssets.I.GetRandomPrefab(files);
 
         grid.cameraParent = Camera.main.transform;
         grid.SetWinFunc(winFunc);
@@ -35,9 +34,6 @@ public class PuzzleGrid : MonoBehaviour
         gridOffset = (gridSize * gridObjectSize - gridObjectSize) / 2f;
         gridOffset.x *= -1;
         grid = new GridObject[(int)gridSize.x, (int)gridSize.y];
-        Vector3 scale = gridSize / 2f;
-        scale.z = 1;
-        transform.parent.Find("Background").localScale = scale;
 
         // Loop through every row and column
         int dataIndex = 0;
@@ -48,7 +44,7 @@ public class PuzzleGrid : MonoBehaviour
                 // Set up grid objects and each position
                 char digit = text[dataIndex];
                 Vector2 pos = GridToWorldPos((x, y));
-                grid[x, y] = new GridObject(digit, pos, gridObjectSize, parent, textPrefabDigits, winFunc);
+                grid[x, y] = new GridObject(digit, pos, gridObjectSize, transform, textPrefabDigits, winFunc);
                 dataIndex++;
             }
         }
@@ -161,8 +157,7 @@ public class PuzzleGrid : MonoBehaviour
             obj.position = pos;
             obj.localScale = size;
 
-            PuzzleWin win = obj.GetComponent<PuzzleWin>();
-            if (win) win.SetWinFunc(winFunc);
+            if (obj.TryGetComponent(out PuzzleWin win)) win.SetWinFunc(winFunc);
         }
 
         public bool OpenPos() => !wall;
