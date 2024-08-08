@@ -59,13 +59,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
-  MessagePrefab: {fileID: 223894602397469670, guid: b62db026fe8d3aa47bd43248c60f93c1,
+  MessagePrefab: {fileID: 4828136234180794121, guid: b62db026fe8d3aa47bd43248c60f93c1,
     type: 3}
-  QTEPrefab: {fileID: 7704821803823367971, guid: 50938d6ff8173c24aac457ecd726dc5a,
+  QTEPrefab: {fileID: 4453657780199662223, guid: 50938d6ff8173c24aac457ecd726dc5a,
     type: 3}
-  SequencePrefab: {fileID: 6920470975652286676, guid: 7a87ac39d19e26c41b3d13f3da3d3130,
+  SequencePrefab: {fileID: 1723876868166606210, guid: 7a87ac39d19e26c41b3d13f3da3d3130,
     type: 3}
-  MazeOrSudokuPrefab: {fileID: 0}
+  MazePrefab: {fileID: 955784384864218661, guid: 043fe288dc7b8b44087c4502a60f2383,
+    type: 3}
+  MazeFiles: []
   VolumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
   MainMixer: {fileID: 0}
 --- !u!114 &8896241604751481481

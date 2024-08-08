@@ -98,6 +98,15 @@ public partial class @Main: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""d9bb6072-e963-4e97-9f02-c22bf4be2ace"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,28 @@ public partial class @Main: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d98b703-81a9-4cc7-8e83-bbadd85036bd"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1113921d-17f2-4a08-ab78-983ea3b7fc59"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -427,6 +458,7 @@ public partial class @Main: IInputActionCollection2, IDisposable
         m_Character_Crouch = m_Character.FindAction("Crouch", throwIfNotFound: true);
         m_Character_UseSanityKit = m_Character.FindAction("UseSanityKit", throwIfNotFound: true);
         m_Character_Pause = m_Character.FindAction("Pause", throwIfNotFound: true);
+        m_Character_MousePosition = m_Character.FindAction("MousePosition", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -501,6 +533,7 @@ public partial class @Main: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Crouch;
     private readonly InputAction m_Character_UseSanityKit;
     private readonly InputAction m_Character_Pause;
+    private readonly InputAction m_Character_MousePosition;
     public struct CharacterActions
     {
         private @Main m_Wrapper;
@@ -513,6 +546,7 @@ public partial class @Main: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Character_Crouch;
         public InputAction @UseSanityKit => m_Wrapper.m_Character_UseSanityKit;
         public InputAction @Pause => m_Wrapper.m_Character_Pause;
+        public InputAction @MousePosition => m_Wrapper.m_Character_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -546,6 +580,9 @@ public partial class @Main: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -574,6 +611,9 @@ public partial class @Main: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -681,6 +721,7 @@ public partial class @Main: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnUseSanityKit(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

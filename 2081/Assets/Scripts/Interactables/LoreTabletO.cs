@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LoreTablet : MonoBehaviour, IInteractable
+public class LoreTabletO : MonoBehaviour, IInteractable
 {
 
     // Display lore to the player on pickup

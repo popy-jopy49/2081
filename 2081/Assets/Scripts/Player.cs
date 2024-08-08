@@ -74,9 +74,9 @@ public class Player : Singleton<Player>
 
     private void OnSanityChange(object sender, (float c, float m) sanity)
     {
+        print("Dead");
         if (sanity.c > 0)
             return;
-        print("Dead");
         // Respawn at position if sanity reaches 0
         transform.position = respawnPos;
         this.sanity = maxSanity;
@@ -137,7 +137,9 @@ public class Player : Singleton<Player>
 
     public void DecreaseSanity(float amount)
     {
-        //sanity
+        // decrease sanity
+        sanity -= amount;
+        OnSanityChanged?.Invoke(this, (sanity, maxSanity));
     }
 
     // Increase sanity kit count by 1 and update UI

@@ -1,14 +1,29 @@
 using UnityEngine;
 
+[RequireComponent (typeof(BoxCollider))]
 public class DeathZone : MonoBehaviour
 {
+    
+    private Player player;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            player = other.GetComponent<Player>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (player)
         {
-            other.GetComponent<Player>().DecreaseSanity(10);
+            player.DecreaseSanity(10);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            player = null;
     }
 
 }

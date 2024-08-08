@@ -14,12 +14,12 @@ public class MazeController : MonoBehaviour, IDragHandler
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		/*// Grab mouse input
-		//Vector2 mousePos = InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>();
-		//mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+		// Grab mouse input
+		Vector2 mousePos = InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>();
+		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
 		// Convert to world pos
-		//(int x, int y) index = grid.WorldToGridPos(mousePos);
+		(int x, int y) index = grid.WorldToGridPos(mousePos);
 		if (prevIndex == index)
 			return;
 		prevIndex = index;
@@ -31,12 +31,12 @@ public class MazeController : MonoBehaviour, IDragHandler
 		// Valid move position
 		// Find current player position
 		(int x, int y) = grid.WorldToGridPos(transform.position);
-
+			
 		// Switch hasPlayer around
 		grid.grid[x, y].hasPlayer = false;
 		grid.grid[index.x, index.y].hasPlayer = true;
 
 		// move to new pos
-		transform.position = grid.GridToWorldPos(index);*/
+		transform.position = grid.GridToWorldPos(index);
 	}
 }

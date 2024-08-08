@@ -35,15 +35,15 @@ public class Hacking_LockedDoor : Door
 		// Chance <= 33: Spawn Quick time event puzzle
 		// Chance <= 66: Spawn sequence puzzle
 		// Otherwise: spawn maze and make hacking parent the parent
-		GameObject puzzle = Instantiate(randomChance <= 50 ? GameAssets.I.QTEPrefab :
-					(randomChance <= 100 ? GameAssets.I.SequencePrefab :
-					GameAssets.I.MazeOrSudokuPrefab), 
+		Transform puzzle = Instantiate(randomChance <= 33 ? GameAssets.I.QTEPrefab :
+					(randomChance <= 66 ? GameAssets.I.SequencePrefab :
+					GameAssets.I.MazePrefab), 
 					hackingParent);
 
 		puzzle.GetComponent<HackPuzzle>().OnPuzzleComplete += (_, success) => {
             // Always destroy the puzzle and relock the cursor
             GameValues.IN_PUZZLE = false;
-            Destroy(puzzle);
+            Destroy(puzzle.gameObject);
 			Cursor.lockState = GameValues.I.GameCursorState;
             if (GameValues.I.GameCursorVisibility == GameValues.CursorVisibility.Visible) { Cursor.visible = true; }
             else if (GameValues.I.GameCursorVisibility != GameValues.CursorVisibility.Default) { Cursor.visible = false; }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(BoxCollider))]
 public class AirLockRoom : MonoBehaviour
@@ -27,13 +26,6 @@ public class AirLockRoom : MonoBehaviour
             player.AddMoveOffset(Vector3.zero);
             player = null;
         }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (!player)
-            return;
-
     }
 
 }
