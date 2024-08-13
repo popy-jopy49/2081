@@ -2,7 +2,7 @@
 
 public class MouseLook : MonoBehaviour {
 
-    [SerializeField] private float mouseSensitivity = 1000f;
+    [SerializeField] private float mouseSensitivity = 5f;
 	[SerializeField] private Transform player;
     private float xRotation;
 
@@ -16,8 +16,8 @@ public class MouseLook : MonoBehaviour {
     {
         // Get input on mouse movement and modify it based on frame count and sensitivity
         Vector2 mouseInput = InputManager.MAIN.Character.Camera.ReadValue<Vector2>();
-        float mouseX = mouseInput.x * mouseSensitivity * Time.deltaTime;
-        float mouseY = mouseInput.y * mouseSensitivity * Time.deltaTime;
+        float mouseX = mouseInput.x * mouseSensitivity * Time.deltaTime * 1000f;
+        float mouseY = mouseInput.y * mouseSensitivity * Time.deltaTime * 1000f;
 
         // Rotate player on horizontal mouse movement
         player.Rotate(Vector3.up * mouseX);
