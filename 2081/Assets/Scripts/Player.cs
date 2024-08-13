@@ -37,11 +37,6 @@ public class Player : Singleton<Player>
         OnSanityChanged += OnSanityChange;
     }
 
-    private void Start()
-    {
-        //PuzzleGrid.Setup(GameAssets.I.MazePrefab, GameAssets.I.MazeFiles, () => print("You Win!"));
-    }
-
     private void Interact_Started(InputAction.CallbackContext obj)
     {
         // If interactables nearby, call OnInteract();
@@ -51,14 +46,16 @@ public class Player : Singleton<Player>
 		{
 			interactables.RemoveAt(0);
             OnInteractablesChange?.Invoke(this, interactables.Count);
-            // TODO: Play success sound
+            // Play success sound
+            SoundManager.PlayEffect(GameAssets.I.SuccessSoundEffect);
 
             //Add sanity
             AddSanity(sanityWonOnWin);
 		}
 		else
         {
-            // TODO: Play failure sound
+            // Play failure sound
+            SoundManager.PlayEffect(GameAssets.I.FailureSoundEffect);
 
             // Remove sanity
             DecreaseSanity(sanityLostOnFailure);
