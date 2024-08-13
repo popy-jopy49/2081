@@ -39,7 +39,7 @@ public class Player : Singleton<Player>
 
     private void Start()
     {
-        PuzzleGrid.Setup(GameAssets.I.MazePrefab, GameAssets.I.MazeFiles, () => print("You Win!"));
+        //PuzzleGrid.Setup(GameAssets.I.MazePrefab, GameAssets.I.MazeFiles, () => print("You Win!"));
     }
 
     private void Interact_Started(InputAction.CallbackContext obj)

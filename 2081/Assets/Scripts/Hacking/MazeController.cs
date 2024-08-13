@@ -16,16 +16,17 @@ public class MazeController : MonoBehaviour, IDragHandler
 	{
 		// Grab mouse input
 		Vector2 mousePos = InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>();
-		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-		// Convert to world pos
+		// Convert to grid pos
 		(int x, int y) index = grid.WorldToGridPos(mousePos);
-		if (prevIndex == index)
+        //print(index);
+		// Exit if same index
+        if (prevIndex == index)
 			return;
-		prevIndex = index;
+		//prevIndex = index;
 
 		// check if valid move position
-		if (!grid.ValidMovePosition(index))
+		if (!grid.AreNeighbours(index, prevIndex))
 			return;
 
 		// Valid move position
