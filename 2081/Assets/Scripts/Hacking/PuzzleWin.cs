@@ -4,7 +4,7 @@ using UnityEngine;
 public class PuzzleWin : MonoBehaviour
 {
 
-    private Action winFunc;
+    private PuzzleGrid grid;
 
     // When colliding with puzzle, win
     private void OnTriggerEnter2D(Collider2D collision)
@@ -13,10 +13,10 @@ public class PuzzleWin : MonoBehaviour
             return;
 
         // Win
-        winFunc();
+        //winFunc();
     }
 
     // Sets win func to be called when we win
-    public void SetWinFunc(Action winFunc) => this.winFunc = winFunc;
+    public void SetWinFunc(PuzzleGrid grid) => this.grid = grid;
 
 }

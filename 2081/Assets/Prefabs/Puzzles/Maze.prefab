@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 21, y: 11}
-  gridObjectSize: {x: 20, y: 20}
+  gridObjectSize: {x: 50, y: 50}
   textPrefabDigits:
   - digit: 48
     prefab: {fileID: 1640710698911554171, guid: 01899c3ca46ea73479ed34b125506258,

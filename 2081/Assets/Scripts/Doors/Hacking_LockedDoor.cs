@@ -40,7 +40,7 @@ public class Hacking_LockedDoor : Door
 					GameAssets.I.MazePrefab), 
 					hackingParent);
 
-		puzzle.GetComponent<HackPuzzle>().OnPuzzleComplete += (_, success) => {
+		hackingParent.GetComponentInChildren<HackPuzzle>().OnPuzzleComplete += (_, success) => {
             // Always destroy the puzzle and relock the cursor
             GameValues.IN_PUZZLE = false;
             Destroy(puzzle.gameObject);

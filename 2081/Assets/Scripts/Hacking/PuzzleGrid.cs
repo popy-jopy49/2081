@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-public class PuzzleGrid : MonoBehaviour
+public class PuzzleGrid : HackPuzzle
 {
     public GridObject[,] grid;
     [SerializeField] private Vector2 gridSize;
@@ -12,24 +12,20 @@ public class PuzzleGrid : MonoBehaviour
     [SerializeField] private TextPrefabDigit[] textPrefabDigits;
     private Vector2 gridOffset;
 
-    private Action winFunc;
-    private Transform cameraParent;
+    //private Transform cameraParent;
 
-    // Global static function to instantiate new grid
-    public static PuzzleGrid Setup(Transform prefab, GameAssets.PrefabData<string>[] files, Action winFunc)
+    public void Awake()
     {
-        PuzzleGrid grid = Instantiate(prefab, GameValues.GetCanvas().Find("HackingGameParent")).Find("MazeBackground").Find("Grid").GetComponent<PuzzleGrid>();
-        grid.fileName = GameAssets.I.GetRandomPrefab(files);
+        fileName = GameAssets.I.GetRandomPrefab(GameAssets.I.MazeFiles);
 
-        grid.cameraParent = Camera.main.transform;
-        grid.SetWinFunc(winFunc);
-        string text = grid.GetTextAtPath(grid.fileName);
-        grid.InitialiseGrid(text);
-        return grid;
+        //cameraParent = GameValues.GetCamera().transform;
+        string text = GetTextAtPath(fileName);
+        InitialiseGrid(text);
     }
 
     private void InitialiseGrid(string text)
     {
+
         // set grid offset and dimensions
         gridOffset = (gridSize * gridObjectSize - gridObjectSize) / 2f;
         gridOffset.x *= -1;
@@ -44,7 +40,7 @@ public class PuzzleGrid : MonoBehaviour
                 // Set up grid objects and each position
                 char digit = text[dataIndex];
                 Vector2 pos = GridToWorldPos((x, y));
-                grid[x, y] = new GridObject(digit, pos, gridObjectSize, transform, textPrefabDigits, winFunc);
+                grid[x, y] = new GridObject(digit, pos, gridObjectSize, transform, textPrefabDigits);
                 dataIndex++;
             }
         }
@@ -107,7 +103,6 @@ public class PuzzleGrid : MonoBehaviour
         // Reverses grid to world transformations
         Vector2 index = pos;
         index -= gridOffset;
-        index -= (Vector2)cameraParent.position;
         index /= gridObjectSize;
         index.y *= -1;
         return (Mathf.RoundToInt(index.x), Mathf.RoundToInt(index.y));
@@ -116,7 +111,7 @@ public class PuzzleGrid : MonoBehaviour
     // applies reverse transformations to those in the setup
     public Vector2 GridToWorldPos((int x, int y) index)
     {
-        return new Vector2(index.x, -index.y) * gridObjectSize + gridOffset + (Vector2)cameraParent.position;
+        return new Vector2(index.x, -index.y) * gridObjectSize + gridOffset;
     }
 
     public bool IsValidGridPosition((int x, int y) index)
@@ -126,8 +121,6 @@ public class PuzzleGrid : MonoBehaviour
                index.y >= 0 && index.y < grid.GetLength(1);
     }
 
-    public void SetWinFunc(Action func) => winFunc = func;
-
     public class GridObject
     {
         public bool hasPlayer = false;
@@ -135,7 +128,7 @@ public class PuzzleGrid : MonoBehaviour
         char digit;
 
         // Setup grid position
-        public GridObject(char digit, Vector2 pos, Vector2 size, Transform parent, TextPrefabDigit[] textPrefabDigits, Action winFunc)
+        public GridObject(char digit, Vector2 pos, Vector2 size, Transform parent, TextPrefabDigit[] textPrefabDigits)
         {
             this.digit = digit;
             Transform prefab = null;
@@ -153,11 +146,12 @@ public class PuzzleGrid : MonoBehaviour
             if (!prefab)
                 return;
 
-            Transform obj = Instantiate(prefab, parent);
-            obj.position = pos;
-            obj.localScale = size;
+            RectTransform obj = Instantiate(prefab, parent).GetComponent<RectTransform>();
+            obj.anchoredPosition = pos;
+            obj.sizeDelta = size / 2f;
 
-            if (obj.TryGetComponent(out PuzzleWin win)) win.SetWinFunc(winFunc);
+            // Will change
+            if (obj.TryGetComponent(out PuzzleWin win)) win.SetWinFunc(obj.parent.GetComponent<PuzzleGrid>());
         }
 
         public bool OpenPos() => !wall;
