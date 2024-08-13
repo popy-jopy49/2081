@@ -2,8 +2,6 @@
 using UnityEngine.Audio;
 using SWAssets;
 using UnityEngine.Rendering;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 
 public class GameAssets : Singleton<GameAssets> {
 
@@ -17,8 +15,12 @@ public class GameAssets : Singleton<GameAssets> {
     [Header("Post Processing")]
     public VolumeProfile VolumeProfile;
 
-    [Header("Mixers")]
+    [Header("Sound")]
     public AudioMixer MainMixer;
+    public Audio SuccessSoundEffect;
+    public Audio FailureSoundEffect;
+    public Audio MenuMusicAudio;
+    public Audio LevelMusicAudio;
 
 	void Awake()
 	{
@@ -38,7 +40,7 @@ public class GameAssets : Singleton<GameAssets> {
         // the clips themsleves
         public AudioClip[] clips;
 		// the scene it should play in
-		public GameValues.SceneIndexes sceneToPlay;
+		public bool playInMainMenu;
 		// whether they should repeat
 		public bool shouldRepeat;
 		// Whether they should shuffle
@@ -47,7 +49,7 @@ public class GameAssets : Singleton<GameAssets> {
 
         public void Play(AudioSource source)
         {
-            if (GameValues.GetActiveBuildIndex() != (int)sceneToPlay)
+            if (GameValues.GetActiveBuildIndex() != 0 && playInMainMenu)
                 return;
 
             if (!shouldRepeat && indexOfTrack >= clips.Length)

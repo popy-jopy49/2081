@@ -1,25 +1,28 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SoundManager : MonoBehaviour
+public static class SoundManager
 {
 
-	AudioSource effects;
-	AudioSource music;
+	private static AudioSource effects;
+	private static AudioSource music;
 
-	private void Awake()
+	static SoundManager()
 	{
-		effects = transform.Find("Effects").GetComponent<AudioSource>();
-		music = transform.Find("Music").GetComponent<AudioSource>();
+		effects = GameObject.Find("EffectsSource").GetComponent<AudioSource>();
+		music = GameObject.Find("MusicSource").GetComponent<AudioSource>();
+		SceneManager.activeSceneChanged += BeginMusic;
 	}
 
-	public void PlayEffect()
+	public static void PlayEffect(GameAssets.Audio audio)
 	{
-
+		audio.Play(effects);
 	}
 
-	private void BeginMusic()
-	{
-
-	}
+	private static void BeginMusic(Scene scene1, Scene scene2)
+    {
+        GameAssets.I.MenuMusicAudio.Play(music);
+        GameAssets.I.LevelMusicAudio.Play(music);
+    }
 
 }

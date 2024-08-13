@@ -75,7 +75,22 @@ MonoBehaviour:
   - obj: MazeBinary3.txt
     chance: 25
   VolumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
-  MainMixer: {fileID: 0}
+  MainMixer: {fileID: 24100000, guid: fd2e95e311c5b5e4da32b572f6628427, type: 2}
+  SuccessSoundEffect:
+    clips: []
+    sceneToPlay: 0
+    shouldRepeat: 0
+    shouldShuffle: 0
+  FailureSoundEffect:
+    clips: []
+    sceneToPlay: 0
+    shouldRepeat: 0
+    shouldShuffle: 0
+  MusicAudio:
+    clips: []
+    sceneToPlay: 0
+    shouldRepeat: 0
+    shouldShuffle: 0
 --- !u!114 &8896241604751481481
 MonoBehaviour:
   m_ObjectHideFlags: 0
