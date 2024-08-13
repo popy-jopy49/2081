@@ -5,39 +5,47 @@ public class MazeController : MonoBehaviour, IDragHandler
 {
 	PuzzleGrid grid;
 	private (int x, int y) prevIndex = default;
+	RectTransform rectTransform;
 
 	// Reference grid in puzzle
 	private void Awake()
 	{
+		rectTransform = GetComponent<RectTransform>();
 		grid = transform.parent.parent.Find("Grid").GetComponent<PuzzleGrid>();
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
 		// Grab mouse input
-		Vector2 mousePos = InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>();
+		Vector2 mouseOffset = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height) / 2f;
+		Vector2 mousePos = (InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>() - mouseOffset) / 2f;
 
 		// Convert to grid pos
-		(int x, int y) index = grid.WorldToGridPos(mousePos);
-        //print(index);
+		(int x, int y) draggedIndex = grid.CanvasToGridPos(mousePos);
+        
 		// Exit if same index
-        if (prevIndex == index)
+        if (prevIndex == draggedIndex)
 			return;
-		//prevIndex = index;
+
+		// Find current player position
+		(int x, int y) playerIndex = grid.CanvasToGridPos(rectTransform.localPosition);
 
 		// check if valid move position
-		if (!grid.AreNeighbours(index, prevIndex))
+		if (!grid.AreNeighbours(draggedIndex, playerIndex) || !grid.grid[draggedIndex.x, draggedIndex.y].OpenPos())
 			return;
 
 		// Valid move position
-		// Find current player position
-		(int x, int y) = grid.WorldToGridPos(transform.position);
-			
 		// Switch hasPlayer around
-		grid.grid[x, y].hasPlayer = false;
-		grid.grid[index.x, index.y].hasPlayer = true;
+		grid.grid[playerIndex.x, playerIndex.y].hasPlayer = false;
+		grid.grid[draggedIndex.x, draggedIndex.y].hasPlayer = true;
 
 		// move to new pos
-		transform.position = grid.GridToWorldPos(index);
+		rectTransform.localPosition = grid.GridToCanvasPos(draggedIndex, grid.GetGridOffset());
+
+		// Check if the player is now on the winning area
+		if (grid.grid[draggedIndex.x, draggedIndex.y].win)
+		{
+			grid.Win();
+		}
 	}
 }

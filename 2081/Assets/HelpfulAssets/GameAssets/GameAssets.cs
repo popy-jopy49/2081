@@ -2,6 +2,8 @@
 using UnityEngine.Audio;
 using SWAssets;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class GameAssets : Singleton<GameAssets> {
 
@@ -28,6 +30,55 @@ public class GameAssets : Singleton<GameAssets> {
     {
         public T obj;
         public float chance;
+    }
+
+    [System.Serializable]
+    public struct Audio
+    {
+        // the clips themsleves
+        public AudioClip[] clips;
+		// the scene it should play in
+		public GameValues.SceneIndexes sceneToPlay;
+		// whether they should repeat
+		public bool shouldRepeat;
+		// Whether they should shuffle
+		public bool shouldShuffle;
+        int indexOfTrack;
+
+        public void Play(AudioSource source)
+        {
+            if (GameValues.GetActiveBuildIndex() != (int)sceneToPlay)
+                return;
+
+            if (!shouldRepeat && indexOfTrack >= clips.Length)
+                return;
+
+            // In the correct scene
+            if (shouldShuffle && clips.Length > 1)
+			{
+                int randomIndex;
+				do
+				{
+					randomIndex = Random.Range(0, clips.Length);
+				} while (randomIndex != indexOfTrack);
+
+				source.clip = clips[randomIndex];
+				source.Play();
+                indexOfTrack = randomIndex;
+			}
+            else
+            {
+                source.clip = clips[indexOfTrack];
+                source.Play();
+                indexOfTrack++;
+                if (indexOfTrack >= clips.Length && shouldRepeat)
+                    indexOfTrack = 0;
+            }
+
+            
+        }
+
+        // Repeat Play after end of track
     }
 
     public T GetRandomPrefab<T>(PrefabData<T>[] prefabDatas)

@@ -1,6 +1,6 @@
 using SWAssets;
 using UnityEngine;
-using static Michsky.UI.Heat.PauseMenuManager;
+using UnityEngine.SceneManagement;
 
 public class GameValues : Singleton<GameValues>
 {
@@ -24,6 +24,16 @@ public class GameValues : Singleton<GameValues>
     public CursorVisibility MenuCursorVisibility = CursorVisibility.Visible;
     public CursorVisibility GameCursorVisibility = CursorVisibility.Invisible;
 
+    public enum SceneIndexes
+    {
+        MainMenuScene = 0,
+		Level1 = 1,
+		Level2 = 2,
+		Level3 = 3,
+		Level4 = 4,
+		Level5 = 5,
+	}
+
     public enum CursorVisibility { Default, Invisible, Visible }
 
     void Awake()
@@ -35,5 +45,6 @@ public class GameValues : Singleton<GameValues>
 
     public static Camera GetCamera() => CAMERA;
     public static Transform GetCanvas() => CANVAS_HUD;
+    public static int GetActiveBuildIndex() => SceneManager.GetActiveScene().buildIndex;
 
 }

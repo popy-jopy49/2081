@@ -168,14 +168,17 @@ MonoBehaviour:
       type: 3}
     wall: 1
     player: 0
+    win: 0
   - digit: 80
     prefab: {fileID: 914361244444690528, guid: 76fd28813ecd6a549a517d16fbc59a40, type: 3}
     wall: 0
     player: 1
+    win: 0
   - digit: 88
     prefab: {fileID: 539285494582180981, guid: 19ca29e3ae866ca47bf12fddc0731a15, type: 3}
     wall: 0
     player: 0
+    win: 1
 --- !u!1 &955784386472715644
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.044025064, g: 0.044025064, b: 0.044025064, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
