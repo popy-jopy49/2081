@@ -22,7 +22,7 @@ public class MazeController : MonoBehaviour, IDragHandler
 
 		// Convert to grid pos
 		(int x, int y) draggedIndex = grid.CanvasToGridPos(mousePos);
-        
+
 		// Exit if same index
         if (prevIndex == draggedIndex)
 			return;
@@ -30,8 +30,10 @@ public class MazeController : MonoBehaviour, IDragHandler
 		// Find current player position
 		(int x, int y) playerIndex = grid.CanvasToGridPos(rectTransform.localPosition);
 
-		// check if valid move position
-		if (!grid.AreNeighbours(draggedIndex, playerIndex) || !grid.grid[draggedIndex.x, draggedIndex.y].OpenPos())
+        print(grid.AreNeighbours(draggedIndex, playerIndex)); // Returning false
+        print(grid.grid[draggedIndex.x, draggedIndex.y].OpenPos());
+        // check if valid move position
+        if (!grid.AreNeighbours(draggedIndex, playerIndex) || !grid.grid[draggedIndex.x, draggedIndex.y].OpenPos())
 			return;
 
 		// Valid move position

@@ -12,6 +12,10 @@ public class GameAssets : Singleton<GameAssets> {
 	public Transform MazePrefab;
     public PrefabData<string>[] MazeFiles;
 
+    [Header("UI")]
+    public RectTransform LogButton;
+    public RectTransform Spacer;
+
     [Header("Post Processing")]
     public VolumeProfile VolumeProfile;
 
