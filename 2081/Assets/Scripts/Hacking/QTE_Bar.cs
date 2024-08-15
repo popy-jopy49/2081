@@ -26,7 +26,7 @@ public class QTE_Bar : MonoBehaviour
 		bar.sizeDelta = new Vector2(barWidth, 0);
 		// Random between left extent + width of bar and right extent - width of bar
 		barXPos = Random.Range(-totalQTEWidth + barWidth, totalQTEWidth - barWidth);
-		bar.localPosition = new Vector2(barXPos, 0);
+		bar.anchoredPosition = new Vector2(barXPos, 0);
 	}
 
 	private void Awake()
@@ -52,7 +52,7 @@ public class QTE_Bar : MonoBehaviour
 			return;
 
         // Check if outside zone and return
-        if (slider.localPosition.x < barXPos - barWidth/2 || slider.localPosition.x > barXPos + barWidth/2)
+        if (slider.anchoredPosition.x < barXPos - barWidth/2 || slider.anchoredPosition.x > barXPos + barWidth/2)
 		{
 			OnComplete?.Invoke(this, false);
 			return;
@@ -66,12 +66,12 @@ public class QTE_Bar : MonoBehaviour
 	private void Update()
 	{
 		// Make slider move left and right
-		slider.localPosition = new Vector2(slider.localPosition.x + (moveAmount * (negativeMovement ? -1 : 1)), 0);
+		slider.anchoredPosition = new Vector2(slider.anchoredPosition.x + (moveAmount * (negativeMovement ? -1 : 1)), 0);
 
 		// Reverse direction if on the edge of movement
-		if (slider.localPosition.x <= -totalQTEWidth + slider.rect.width * 2)
+		if (slider.anchoredPosition.x <= -totalQTEWidth + slider.rect.width * 2)
 			negativeMovement = false;
-		else if (slider.localPosition.x >= totalQTEWidth - slider.rect.width * 2)
+		else if (slider.anchoredPosition.x >= totalQTEWidth - slider.rect.width * 2)
 			negativeMovement = true;
 	}
 
