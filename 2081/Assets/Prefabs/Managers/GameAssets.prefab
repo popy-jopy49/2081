@@ -78,17 +78,22 @@ MonoBehaviour:
   MainMixer: {fileID: 24100000, guid: fd2e95e311c5b5e4da32b572f6628427, type: 2}
   SuccessSoundEffect:
     clips: []
-    sceneToPlay: 0
+    playInMainMenu: 0
     shouldRepeat: 0
     shouldShuffle: 0
   FailureSoundEffect:
     clips: []
-    sceneToPlay: 0
+    playInMainMenu: 0
     shouldRepeat: 0
     shouldShuffle: 0
-  MusicAudio:
+  MenuMusicAudio:
     clips: []
-    sceneToPlay: 0
+    playInMainMenu: 0
+    shouldRepeat: 0
+    shouldShuffle: 0
+  LevelMusicAudio:
+    clips: []
+    playInMainMenu: 0
     shouldRepeat: 0
     shouldShuffle: 0
 --- !u!114 &8896241604751481481
@@ -104,8 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
-  minMoveAmount: 1
-  maxMoveAmount: 3
+  minMoveAmount: 2
+  maxMoveAmount: 4
   minBarWidth: 50
   maxBarWidth: 150
   minNumberOfSequences: 5
