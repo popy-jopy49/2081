@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class MazeController : MonoBehaviour, IDragHandler
 {
 	PuzzleGrid grid;
+	RectTransform gridRectTransform;
 	private (int x, int y) prevIndex = default;
 	RectTransform rectTransform;
 
@@ -12,13 +13,14 @@ public class MazeController : MonoBehaviour, IDragHandler
 	{
 		rectTransform = GetComponent<RectTransform>();
 		grid = transform.parent.parent.Find("Grid").GetComponent<PuzzleGrid>();
+		gridRectTransform = grid.GetComponent<RectTransform>();
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
 		// Grab mouse input
-		Vector2 mouseOffset = new Vector2(3840, 2160) / 2f;
-		Vector2 mousePos = (InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>() - mouseOffset) / 2f;
+		RectTransformUtility.ScreenPointToLocalPointInRectangle(gridRectTransform, 
+			InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>(), null, out Vector2 mousePos);
 
 		// Convert to grid pos
 		(int x, int y) draggedIndex = grid.CanvasToGridPos(mousePos);
@@ -28,7 +30,7 @@ public class MazeController : MonoBehaviour, IDragHandler
 			return;
 
 		// Find current player position
-		(int x, int y) playerIndex = grid.CanvasToGridPos(rectTransform.localPosition);
+		(int x, int y) playerIndex = grid.CanvasToGridPos(rectTransform.anchoredPosition);
 
         //print(grid.AreNeighbours(draggedIndex, playerIndex)); // Returning false
         //print(grid.grid[draggedIndex.x, draggedIndex.y].OpenPos());
@@ -42,7 +44,7 @@ public class MazeController : MonoBehaviour, IDragHandler
 		grid.grid[draggedIndex.x, draggedIndex.y].hasPlayer = true;
 
 		// move to new pos
-		rectTransform.localPosition = grid.GridToCanvasPos(draggedIndex, grid.GetGridOffset());
+		rectTransform.anchoredPosition = grid.GridToCanvasPos(draggedIndex, grid.GetGridOffset());
 
 		// Check if the player is now on the winning area
 		if (grid.grid[draggedIndex.x, draggedIndex.y].win)

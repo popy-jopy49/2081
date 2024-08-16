@@ -2,6 +2,7 @@
 using UnityEngine.Audio;
 using SWAssets;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 public class GameAssets : Singleton<GameAssets> {
 
@@ -12,9 +13,10 @@ public class GameAssets : Singleton<GameAssets> {
 	public Transform MazePrefab;
     public PrefabData<string>[] MazeFiles;
 
-    [Header("UI")]
+    [Header("Log Entries")]
     public RectTransform LogButton;
     public RectTransform Spacer;
+	public List<LogEntry> LogEntries = new();
 
     [Header("Post Processing")]
     public VolumeProfile VolumeProfile;
@@ -31,11 +33,24 @@ public class GameAssets : Singleton<GameAssets> {
 		RegisterSingleton(this);
     }
 
-    [System.Serializable]
+    public void ChangeMasterVolume(float vol) => MainMixer.SetFloat("Master", vol - 80f);
+    public void ChangeSFXVolume(float vol) => MainMixer.SetFloat("SFX", vol - 80f);
+    public void ChangeUIVolume(float vol) => MainMixer.SetFloat("UI", vol - 80f);
+    public void ChangeMusicVolume(float vol) => MainMixer.SetFloat("Music", vol - 80f);
+
+	[System.Serializable]
     public class PrefabData<T>
     {
         public T obj;
         public float chance;
+    }
+
+    [System.Serializable]
+    public struct LogEntry
+    {
+        public string Name;
+		[TextArea] public string Contents;
+        public Sprite CoverImage;
     }
 
     [System.Serializable]

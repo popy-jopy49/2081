@@ -1,4 +1,5 @@
 using SWAssets;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,14 +16,17 @@ public class GameValues : Singleton<GameValues>
     public int minNumberOfSequences;
     public int maxNumberOfSequences;
 
-    //[Header("Global Variables")]
     private static Camera CAMERA;
     private static Transform CANVAS_HUD;
     [HideInInspector] public static bool IN_PUZZLE = false;
+
+    [Header("Mouse Lock Mode")]
     public CursorLockMode MenuCursorState = CursorLockMode.None;
     public CursorLockMode GameCursorState = CursorLockMode.Locked;
     public CursorVisibility MenuCursorVisibility = CursorVisibility.Visible;
     public CursorVisibility GameCursorVisibility = CursorVisibility.Invisible;
+
+    public static float MOUSE_SENSITIVITY;
 
     public enum SceneIndexes
     {
@@ -46,5 +50,6 @@ public class GameValues : Singleton<GameValues>
     public static Camera GetCamera() => CAMERA;
     public static Transform GetCanvas() => CANVAS_HUD;
     public static int GetActiveBuildIndex() => SceneManager.GetActiveScene().buildIndex;
+    public void ChangeMouseSensitivity(float sens) => MOUSE_SENSITIVITY = sens;
 
 }

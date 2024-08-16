@@ -11,8 +11,15 @@ public class EndLevel : MonoBehaviour
 			return;
 
 		// Load next level
-		Cursor.lockState = CursorLockMode.None;
-		SceneManager.LoadScene(0);//SceneManager.GetActiveScene().buildIndex + 1);
+		if (SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).IsValid())
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		}
+		else
+		{
+			Cursor.lockState = CursorLockMode.None;
+			SceneManager.LoadScene(0);
+		}
 	}
 
 }

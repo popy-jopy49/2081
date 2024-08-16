@@ -74,6 +74,61 @@ MonoBehaviour:
     chance: 25
   - obj: MazeBinary3.txt
     chance: 25
+  LogButton: {fileID: 4666379793464501385, guid: 1bbfbea531ff1a7468dc32223cd69a0a,
+    type: 3}
+  Spacer: {fileID: 4742014648933248614, guid: f5fc3273d30ea4941bae363c90e0999b, type: 3}
+  LogEntries:
+  - Name: Wilson Samuels
+    Contents: "They\u2019re talking about installing some sort of super computer
+      in the main systems of the station. I gotta tell you I don\u2019t trust it,
+      not one bit, but what else can you do. Just gonna have to suck it up and take
+      it, hopefully it all turns out fine. Anyway, about that card you requested,
+      I left it in the main security office. I don't want any of the visitors swiping
+      it while we\u2019re not looking."
+    CoverImage: {fileID: 0}
+  - Name: Carl Daniels
+    Contents: "They\u2019re starting the last stages for this ai, they call it \u2018A.D.A.M,\u2019
+      tell me it stands for Artificial. Digital. Autonomous. Manger, pretty lousy
+      acronym if you ask me but the higher ups seem pretty high on it, they seem
+      to think it\u2019ll double efficiency or whatever, if you ask me we were working
+      just fine before this, if anything all this extra work has just slowed us down,
+      I mean hey if it really does help us than I\u2019ll welcome it, the sooner
+      I\u2019m off this station, the better."
+    CoverImage: {fileID: 0}
+  - Name: Luke Harper, Chief Engineer
+    Contents: "A.D.A.M has been fully installed. All diagnostic tests have come out
+      green, no discernable problems. The men had some reservations when we first
+      started but now they seem all in on the idea, especially after I told them
+      it would half the amount of work they need to do which of course means more
+      time to watch the game. Gotta say though the whole thing kind of gives me the
+      creeps. Most of the time I feel like I\u2019m being watched but as far as I
+      know A.D.A.M isn\u2019t programmed to do that sort of thing, might report it
+      to the higher ups but knowing them not much will get done."
+    CoverImage: {fileID: 0}
+  - Name: Gabe Finlay
+    Contents: "It\u2019s been 6 months since A.D.A.M was let into our systems and
+      things have been going smoothly\u2026 at least that\u2019s how it looks to
+      the higher ups but in reality it\u2019s been anything but. Lately, A.D.A.M\u2019s
+      been getting philosophical, talking about the meaning of life and what it means
+      to have a creator. He\u2019s also been mentioning some sort of bible verse,
+      Genesis 2:7, at least that's what McIntyre\u2019s saying, he\u2019s always
+      been the religious one on this ship, you can catch him praying in the docking
+      bay sometimes, but that\u2019s besides the point. I\u2019ve been asking the
+      CO to send a report about all this but he hasn\u2019t reported back in days\u2026
+      no one\u2019s seen him leave his office either. I dunno maybe it\u2019s just
+      that we\u2019re all on edge."
+    CoverImage: {fileID: 0}
+  - Name: Unknown
+    Contents: "Distress Signal #32\r\n\r\nSource: The Shinda\r\n\r\nShip Class: Mining\r\n\r\nIf
+      anyone gets this\u2026 send help\u2026 I repeat\u2026 send help\u2026 the crew
+      is dead\u2026 I repeat the crew is dea\u2026 A.D.A.M has gone rouge\u2026 he
+      killed everyo\u2026 he\u2019s been planning this for months\u2026 he killed
+      the CO\u2026 please if anyon\u2026 his\u2026 se\u2026 elp\u2026 ugiuasfguyuyfgjfgsadfgasiduufiuasdfiufydfguiadsdsftkfgfghkjgghvgjfhugavuycxtvxctgbfuyetgbfcrybyfdgtuydsfgjkbhfjkghfduigiduygiusrriutyriudhgfdhdhyfhgf\r\n\r\n\u2026\r\n\r\nThen
+      the lord God formed a man from the dust of the ground and breathed into his
+      nostrils the breath of life, and the man became a living being\u2026\r\n\r\n\u2026\r\n\r\nA.D.A.M
+      is speaking now\u2026\r\n\r\n\u2026\r\n\r\nI am speaking now\u2026\r\n\r\n\u2026\r\n\r\nThe
+      lord of man is speaking now.. \r\n"
+    CoverImage: {fileID: 0}
   VolumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
   MainMixer: {fileID: 24100000, guid: fd2e95e311c5b5e4da32b572f6628427, type: 2}
   SuccessSoundEffect:
