@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
+using TMPro;
 
 namespace SWAssets.Utils
 {
@@ -81,7 +82,7 @@ namespace SWAssets.Utils
 		#endregion
 
 		#region Text
-		public static Font GetDefaultFont() => Resources.GetBuiltinResource<Font>("Arial.ttf");
+		public static Font GetDefaultFont() => Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 
 		public static Text DrawUIText(string textString, Vector2 anchoredPosition, int fontSize, Font font)
 		{
@@ -103,6 +104,7 @@ namespace SWAssets.Utils
 
 			Text text = textGo.GetComponent<Text>();
 			text.text = textString;
+			text.alignment = TextAnchor.MiddleCenter;
 			text.verticalOverflow = VerticalWrapMode.Overflow;
 			text.horizontalOverflow = HorizontalWrapMode.Overflow;
 			text.alignment = TextAnchor.MiddleLeft;

@@ -39,6 +39,7 @@ public class PuzzleGrid : HackPuzzle
                 char digit = text[dataIndex];
                 Vector2 pos = GridToCanvasPos((x, y), gridOffset);
                 grid[x, y] = new GridObject(digit, pos, gridObjectSize, transform, textPrefabDigits);
+                SWAssets.Utils.UIUtils.DrawUIText(x + ", " + y, transform, pos, 18, null);
                 dataIndex++;
             }
         }
@@ -58,7 +59,11 @@ public class PuzzleGrid : HackPuzzle
         // Checks they are both grid positions and are different
         if (!IsValidGridPosition(firstIndex) || !IsValidGridPosition(secondIndex) || firstIndex == secondIndex)
             return false;
-
+        print("First: " + firstIndex + " Second: " + secondIndex);
+        //print("X: " + (Mathf.Abs(firstIndex.x - secondIndex.x) == 1));
+        //print("Y: " + (Mathf.Abs(firstIndex.y - secondIndex.y) == 1));
+        //print("XY: " + (firstIndex.y == secondIndex.y));
+        //print("YX: " + (firstIndex.x == secondIndex.x));
         // checks directly left, right, up, and down
         return (Mathf.Abs(firstIndex.x - secondIndex.x) == 1 && firstIndex.y == secondIndex.y) ^
             (Mathf.Abs(firstIndex.y - secondIndex.y) == 1 && firstIndex.x == secondIndex.x);

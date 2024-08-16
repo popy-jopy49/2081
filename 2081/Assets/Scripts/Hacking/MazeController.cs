@@ -17,7 +17,7 @@ public class MazeController : MonoBehaviour, IDragHandler
 	public void OnDrag(PointerEventData eventData)
 	{
 		// Grab mouse input
-		Vector2 mouseOffset = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height) / 2f;
+		Vector2 mouseOffset = new Vector2(3840, 2160) / 2f;
 		Vector2 mousePos = (InputManager.MAIN.Character.MousePosition.ReadValue<Vector2>() - mouseOffset) / 2f;
 
 		// Convert to grid pos
@@ -30,8 +30,8 @@ public class MazeController : MonoBehaviour, IDragHandler
 		// Find current player position
 		(int x, int y) playerIndex = grid.CanvasToGridPos(rectTransform.localPosition);
 
-        print(grid.AreNeighbours(draggedIndex, playerIndex)); // Returning false
-        print(grid.grid[draggedIndex.x, draggedIndex.y].OpenPos());
+        //print(grid.AreNeighbours(draggedIndex, playerIndex)); // Returning false
+        //print(grid.grid[draggedIndex.x, draggedIndex.y].OpenPos());
         // check if valid move position
         if (!grid.AreNeighbours(draggedIndex, playerIndex) || !grid.grid[draggedIndex.x, draggedIndex.y].OpenPos())
 			return;
