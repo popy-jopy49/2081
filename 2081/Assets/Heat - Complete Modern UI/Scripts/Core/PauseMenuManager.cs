@@ -24,7 +24,7 @@ namespace Michsky.UI.Heat
         public UnityEvent onClose = new UnityEvent();
 
         // Helpers
-        bool isOn = false;
+        public static bool IsPaused = false;
         bool allowClosing = true;
         float disableAfter = 0.6f;
 
@@ -56,13 +56,13 @@ namespace Michsky.UI.Heat
 
         public void AnimatePauseMenu()
         {
-            if (!isOn) { OpenPauseMenu(); }
+            if (!IsPaused) { OpenPauseMenu(); }
             else { ClosePauseMenu(); }
         }
 
         public void OpenPauseMenu()
         {
-            if (isOn) { return; }
+            if (IsPaused) { return; }
             if (setTimeScale) { Time.timeScale = 0; }
             if (inputBlockDuration > 0)
             {
@@ -73,7 +73,7 @@ namespace Michsky.UI.Heat
 
             StopCoroutine("DisablePauseCanvas");
 
-            isOn = true;
+            IsPaused = true;
             onOpen.Invoke();
 
             pauseMenuCanvas.SetActive(false);
@@ -95,7 +95,7 @@ namespace Michsky.UI.Heat
 
         public void ClosePauseMenu()
         {
-            if (!isOn || !allowClosing) { return; }
+            if (!IsPaused || !allowClosing) { return; }
             if (setTimeScale == true) { Time.timeScale = 1; }
             if (panelManager != null) { panelManager.HideCurrentPanel(); }
 
@@ -103,7 +103,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("DisablePauseCanvas");
 
 
-            isOn = false;
+            IsPaused = false;
             onClose.Invoke();
 
             FadeOutBackground();

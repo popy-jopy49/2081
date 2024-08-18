@@ -26,7 +26,7 @@ public class GameValues : Singleton<GameValues>
     public CursorVisibility MenuCursorVisibility = CursorVisibility.Visible;
     public CursorVisibility GameCursorVisibility = CursorVisibility.Invisible;
 
-    public static float MOUSE_SENSITIVITY;
+    public static float MOUSE_SENSITIVITY = 2.0f;
 
     public enum SceneIndexes
     {
