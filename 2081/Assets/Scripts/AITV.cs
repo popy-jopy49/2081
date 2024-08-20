@@ -1,4 +1,5 @@
 using Michsky.UI.Heat;
+using System;
 using UnityEngine;
 
 public class AITV : MonoBehaviour
@@ -7,6 +8,8 @@ public class AITV : MonoBehaviour
 	[SerializeField] private float updateStep = 0.1f; // Update step in seconds
 	[SerializeField] private int sampleDataLength = 1024;
 	[SerializeField] private AnimationCurve curve;
+
+	public event EventHandler OnCompleteVoiceOver;
 
 	private AudioSource source;
 
@@ -23,7 +26,7 @@ public class AITV : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// CHeck if it is the player
+		// Check if it is the player
 		if (!other.CompareTag("Player"))
 			return;
 
@@ -39,11 +42,11 @@ public class AITV : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		// CHeck if it is the player
+		// Check if it is the player
 		if (!other.CompareTag("Player"))
 			return;
 
-		// Begin playing if there is a clip
+		// Stop playing if there is a clip
 		if (!source.clip)
 		{
 			Debug.LogError($"{GetType()}.OnTriggerEnter: No clip assigned to audio source.");
@@ -55,11 +58,20 @@ public class AITV : MonoBehaviour
 
 	private void Update()
 	{
-		// Play when ! sour.isPlaying and !paused and shouldPlay
+		// Play when !source.isPlaying and !paused and shouldPlay
 		// Pause whn source.isPlaying and paused or !shouldPlay
 		if (shouldPlay && !source.isPlaying && !PauseMenuManager.IsPaused)
-		{
-			source.Play();
+        {
+            // Check for end of clip
+            if (source.time >= source.clip.length)
+            {
+                // End of clip
+                CancelInvoke();
+				shouldPlay = false;
+                OnCompleteVoiceOver?.Invoke(this, null);
+                return;
+            }
+            source.Play();
 		}
 		else if (source.isPlaying && (PauseMenuManager.IsPaused || !shouldPlay))
 		{
