@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7963743809900125890}
-  - component: {fileID: 8062775994409374286}
+  - component: {fileID: 5176256587803875266}
   m_Layer: 0
   m_Name: BunkBeds
   m_TagString: Untagged
@@ -41,8 +41,8 @@ Transform:
   - {fileID: 3550557850386586940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &8062775994409374286
-MeshCollider:
+--- !u!65 &5176256587803875266
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -59,10 +59,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 2.8277106, y: 3.1386151, z: 5.253964}
+  m_Center: {x: -0.1156307, y: 1.5225595, z: 0.28639293}
 --- !u!1 &1582766321277503716
 GameObject:
   m_ObjectHideFlags: 0
