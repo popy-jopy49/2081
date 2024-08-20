@@ -1,3 +1,4 @@
+using Michsky.UI.Heat;
 using UnityEngine;
 
 [RequireComponent (typeof(BoxCollider))]
@@ -14,7 +15,7 @@ public class DeathZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (player)
+        if (player && !PauseMenuManager.IsPaused)
         {
             player.DecreaseSanity(10);
         }

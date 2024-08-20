@@ -1,3 +1,4 @@
+using Michsky.UI.Heat;
 using SWAssets;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ public class Player : Singleton<Player>
     private void Interact_Started(InputAction.CallbackContext obj)
     {
         // If interactables nearby, call OnInteract();
-        if (interactables.Count <= 0) return;
+        if (interactables.Count <= 0 || PauseMenuManager.IsPaused) return;
         // If interaction successful, remove it from nearby interactables
         if (interactables[0].OnInteract())
 		{
@@ -76,7 +77,6 @@ public class Player : Singleton<Player>
 
     private void OnSanityChange(object sender, (float c, float m) sanity)
     {
-        print("Dead");
         if (sanity.c > 0)
             return;
         // Respawn at position if sanity reaches 0
@@ -121,7 +121,7 @@ public class Player : Singleton<Player>
 
 	private void OnTriggerStay(Collider other)
 	{
-        if (!other.TryGetComponent(out FlashingLight fl))
+        if (!other.GetComponent<FlashingLight>())
             return;
 
         // Decrease sanity for every frame around the flickering light

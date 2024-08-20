@@ -19,6 +19,7 @@ public class EnergyBar : MonoBehaviour
 		slider.maxValueLimit = energy.max;
 		slider.maxValue = energy.max;
 		slider.currentValue = energy.current;
+		slider.UpdateUI();
     }
 
 }

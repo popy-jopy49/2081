@@ -15,10 +15,11 @@ public class SanityBar : MonoBehaviour
 
     private void OnSanityChanged(object sender, (float current, float max) sanity)
 	{
-		// Set UI values
+        // Set UI values
 		slider.maxValueLimit = sanity.max;
 		slider.maxValue = sanity.max;
 		slider.currentValue = sanity.current;
-	}
+        slider.UpdateUI();
+    }
 
 }
