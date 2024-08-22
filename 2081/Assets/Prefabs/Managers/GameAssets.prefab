@@ -132,12 +132,14 @@ MonoBehaviour:
   VolumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
   MainMixer: {fileID: 24100000, guid: fd2e95e311c5b5e4da32b572f6628427, type: 2}
   SuccessSoundEffect:
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 7dc36ff0beda4ba4fb4b95f77b7deadd, type: 3}
     playInMainMenu: 0
     shouldRepeat: 0
     shouldShuffle: 0
   FailureSoundEffect:
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 6ad9b96c86f6dbd4cb596c4c473d0f09, type: 3}
     playInMainMenu: 0
     shouldRepeat: 0
     shouldShuffle: 0
@@ -147,10 +149,13 @@ MonoBehaviour:
     shouldRepeat: 0
     shouldShuffle: 0
   LevelMusicAudio:
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 50889fc8ec30b674b9f8737a6a44c529, type: 3}
+    - {fileID: 8300000, guid: 9d1b6c4e4a92455438dd375ecd9a1101, type: 3}
+    - {fileID: 8300000, guid: 8ceb2372daafa3041844de67061e690d, type: 3}
     playInMainMenu: 0
-    shouldRepeat: 0
-    shouldShuffle: 0
+    shouldRepeat: 1
+    shouldShuffle: 1
 --- !u!114 &8896241604751481481
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,25 +4,26 @@ using UnityEngine.SceneManagement;
 public static class SoundManager
 {
 
-	private static AudioSource effects;
-	private static AudioSource music;
+	private static AudioSource effectsSource;
+	private static AudioSource musicSource;
 
 	static SoundManager()
 	{
-		effects = GameObject.Find("EffectsSource").GetComponent<AudioSource>();
-		music = GameObject.Find("MusicSource").GetComponent<AudioSource>();
+		effectsSource = GameObject.Find("EffectsSource").GetComponent<AudioSource>();
+		musicSource = GameObject.Find("MusicSource").GetComponent<AudioSource>();
 		SceneManager.activeSceneChanged += BeginMusic;
+		BeginMusic(new Scene(), new Scene());
 	}
 
 	public static void PlayEffect(GameAssets.Audio audio)
 	{
-		audio.Play(effects);
+		audio.Play(effectsSource);
 	}
 
 	private static void BeginMusic(Scene scene1, Scene scene2)
     {
-        GameAssets.I.MenuMusicAudio.Play(music);
-        GameAssets.I.LevelMusicAudio.Play(music);
+        GameAssets.I.MenuMusicAudio.Play(musicSource);
+        GameAssets.I.LevelMusicAudio.Play(musicSource);
     }
 
 }
