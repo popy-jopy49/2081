@@ -33,6 +33,14 @@ public class GameAssets : Singleton<GameAssets> {
 		RegisterSingleton(this);
     }
 
+    private void Update()
+    {
+        SuccessSoundEffect.Update();
+        FailureSoundEffect.Update();
+        MenuMusicAudio.Update();
+        LevelMusicAudio.Update();
+    }
+
     public void ChangeMasterVolume(float vol) => MainMixer.SetFloat("Master", vol - 80f);
     public void ChangeSFXVolume(float vol) => MainMixer.SetFloat("SFX", vol - 80f);
     public void ChangeUIVolume(float vol) => MainMixer.SetFloat("UI", vol - 80f);
@@ -65,6 +73,7 @@ public class GameAssets : Singleton<GameAssets> {
 		// Whether they should shuffle
 		public bool shouldShuffle;
         int indexOfTrack;
+        AudioSource source;
 
         public void Play(AudioSource source)
         {
@@ -73,33 +82,48 @@ public class GameAssets : Singleton<GameAssets> {
 
             if (!shouldRepeat && indexOfTrack >= clips.Length)
                 return;
+            this.source = source;
 
             // In the correct scene
             if (shouldShuffle && clips.Length > 1)
 			{
+                // Gets different track
                 int randomIndex;
 				do
 				{
 					randomIndex = Random.Range(0, clips.Length);
 				} while (randomIndex != indexOfTrack);
 
+                // Plays track and stores that index in memory
 				source.clip = clips[randomIndex];
 				source.Play();
                 indexOfTrack = randomIndex;
 			}
             else
             {
+                // Loop through tracks linearly
                 source.clip = clips[indexOfTrack];
                 source.Play();
                 indexOfTrack++;
                 if (indexOfTrack >= clips.Length && shouldRepeat)
                     indexOfTrack = 0;
             }
-
-            
         }
 
-        // Repeat Play after end of track
+        public void Update()
+        {
+            // If end of tracks and shouldn't repeat, leave
+            if (!shouldRepeat && indexOfTrack >= clips.Length)
+                return;
+
+            // Finished playing
+            if (source.time >= source.clip.length)
+            {
+                // Repeat
+                Play(source);
+            }
+        }
+
     }
 
     public T GetRandomPrefab<T>(PrefabData<T>[] prefabDatas)
