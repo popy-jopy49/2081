@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 105543883512351558}
   - component: {fileID: 4018040439692671110}
   - component: {fileID: 8896241604751481481}
+  - component: {fileID: 2882570800412219051}
   m_Layer: 0
   m_Name: GameAssets
   m_TagString: Untagged
@@ -130,32 +131,6 @@ MonoBehaviour:
       lord of man is speaking now.. \r\n"
     CoverImage: {fileID: 0}
   VolumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
-  MainMixer: {fileID: 24100000, guid: fd2e95e311c5b5e4da32b572f6628427, type: 2}
-  SuccessSoundEffect:
-    clips:
-    - {fileID: 8300000, guid: 7dc36ff0beda4ba4fb4b95f77b7deadd, type: 3}
-    playInMainMenu: 0
-    shouldRepeat: 0
-    shouldShuffle: 0
-  FailureSoundEffect:
-    clips:
-    - {fileID: 8300000, guid: 6ad9b96c86f6dbd4cb596c4c473d0f09, type: 3}
-    playInMainMenu: 0
-    shouldRepeat: 0
-    shouldShuffle: 0
-  MenuMusicAudio:
-    clips: []
-    playInMainMenu: 0
-    shouldRepeat: 0
-    shouldShuffle: 0
-  LevelMusicAudio:
-    clips:
-    - {fileID: 8300000, guid: 50889fc8ec30b674b9f8737a6a44c529, type: 3}
-    - {fileID: 8300000, guid: 9d1b6c4e4a92455438dd375ecd9a1101, type: 3}
-    - {fileID: 8300000, guid: 8ceb2372daafa3041844de67061e690d, type: 3}
-    playInMainMenu: 0
-    shouldRepeat: 1
-    shouldShuffle: 1
 --- !u!114 &8896241604751481481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,3 +154,47 @@ MonoBehaviour:
   GameCursorState: 1
   MenuCursorVisibility: 2
   GameCursorVisibility: 1
+--- !u!114 &2882570800412219051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2414282100730859477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53308d0b2bf8a9f46a224980f19b91ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 0
+  MainMixer: {fileID: 24100000, guid: fd2e95e311c5b5e4da32b572f6628427, type: 2}
+  SuccessSoundEffect:
+    clips:
+    - {fileID: 8300000, guid: 7dc36ff0beda4ba4fb4b95f77b7deadd, type: 3}
+    playInMainMenu: 0
+    shouldRepeat: 0
+    shouldShuffle: 0
+    playWhilePaused: 0
+  FailureSoundEffect:
+    clips:
+    - {fileID: 8300000, guid: 6ad9b96c86f6dbd4cb596c4c473d0f09, type: 3}
+    playInMainMenu: 0
+    shouldRepeat: 0
+    shouldShuffle: 0
+    playWhilePaused: 0
+  MenuMusicAudio:
+    clips:
+    - {fileID: 8300000, guid: 533dc911aa675f64ab91c5490085d021, type: 3}
+    playInMainMenu: 1
+    shouldRepeat: 1
+    shouldShuffle: 0
+    playWhilePaused: 1
+  LevelMusicAudio:
+    clips:
+    - {fileID: 8300000, guid: 50889fc8ec30b674b9f8737a6a44c529, type: 3}
+    - {fileID: 8300000, guid: 9d1b6c4e4a92455438dd375ecd9a1101, type: 3}
+    - {fileID: 8300000, guid: 8ceb2372daafa3041844de67061e690d, type: 3}
+    playInMainMenu: 0
+    shouldRepeat: 1
+    shouldShuffle: 1
+    playWhilePaused: 1

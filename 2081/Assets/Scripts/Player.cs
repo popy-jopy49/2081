@@ -24,7 +24,7 @@ public class Player : Singleton<Player>
 	private float sanity = 0;
 
     // Other
-	private Vector3 respawnPos = Vector3.zero;
+	private Vector3 respawnPos = new(0, 2.5f, 0);
     private List<IInteractable> interactables = new();
     private static bool hasKeycard = false;
 
@@ -48,7 +48,7 @@ public class Player : Singleton<Player>
 			interactables.RemoveAt(0);
             OnInteractablesChange?.Invoke(this, interactables.Count);
             // Play success sound
-            SoundManager.PlayEffect(GameAssets.I.SuccessSoundEffect);
+            SoundManager.I.PlayEffect(SoundManager.I.SuccessSoundEffect);
 
             //Add sanity
             AddSanity(sanityWonOnWin);
@@ -56,7 +56,7 @@ public class Player : Singleton<Player>
 		else
         {
             // Play failure sound
-            SoundManager.PlayEffect(GameAssets.I.FailureSoundEffect);
+            SoundManager.I.PlayEffect(SoundManager.I.FailureSoundEffect);
 
             // Remove sanity
             DecreaseSanity(sanityLostOnFailure);
@@ -111,7 +111,6 @@ public class Player : Singleton<Player>
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (!other.TryGetComponent(out IInteractable pickupable)) return;
 
 		// Add interactable to list of nearby interactables and update UI
