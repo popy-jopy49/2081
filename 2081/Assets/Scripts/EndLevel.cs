@@ -10,8 +10,8 @@ public class EndLevel : MonoBehaviour
 		if (!other.CompareTag("Player"))
 			return;
 
-		// Load next level
-		if (SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).IsValid())
+		// Load next level if not level 3
+		if (GameValues.GetActiveBuildIndex() != 3)
 		{
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		}
