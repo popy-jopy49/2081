@@ -16,6 +16,7 @@ public class SanityBar : MonoBehaviour
     private void OnSanityChanged(object sender, (float current, float max) sanity)
 	{
         // Set UI values
+        print(sanity.max);
 		slider.maxValueLimit = sanity.max;
 		slider.maxValue = sanity.max;
 		slider.currentValue = sanity.current;

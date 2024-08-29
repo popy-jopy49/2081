@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8681349668271891586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: eb4f16ce20acd4f419798ebac3e6a920, type: 3}
-  currentValue: 76.5
+  currentValue: 100
   minValue: 0
   maxValue: 100
   minValueLimit: 0
@@ -1297,7 +1297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: d19581cafb36ea442ae5e48dcd9d868c, type: 3}
-  currentValue: 41.2
+  currentValue: 100
   minValue: 0
   maxValue: 100
   minValueLimit: 0

@@ -24,7 +24,7 @@ public class Player : Singleton<Player>
 	private float sanity = 0;
 
     // Other
-	private Vector3 respawnPos = new(0, 2.5f, 0);
+	[SerializeField] private Vector3 respawnPos = new(0, 2.5f, 0);
     private List<IInteractable> interactables = new();
     private static bool hasKeycard = false;
 
@@ -36,6 +36,7 @@ public class Player : Singleton<Player>
         InputManager.MAIN.Character.UseSanityKit.started += UseSanityKit_Started;
         InputManager.MAIN.Character.Interact.started += Interact_Started;
         OnSanityChanged += OnSanityChange;
+        OnInteractablesChange?.Invoke(this, 0);
     }
 
     private void Interact_Started(InputAction.CallbackContext obj)
@@ -105,6 +106,8 @@ public class Player : Singleton<Player>
     // Increase sanity by amount and update UI
     private void AddSanity(float added_sanity)
     {
+        if (sanity + added_sanity > maxSanity)
+            sanity = maxSanity;
         sanity += added_sanity;
         OnSanityChanged?.Invoke(null, (sanity, maxSanity));
     }

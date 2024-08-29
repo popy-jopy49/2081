@@ -12,12 +12,19 @@ public class InteractUIO : MonoBehaviour
         child.SetActive(false);
         // Call function when an interactable goes in or out of range
         Player.OnInteractablesChange += OnInteractableChange;
+        print(child.activeSelf);
+    }
+
+    private void Update()
+    {
+        print("Update" + child.activeSelf);
     }
 
     private void OnInteractableChange(object sender, int count)
     {
         // Hide if there are no interactables in range. Show if there are
         child.SetActive(count > 0);
+        print("change" + child.activeSelf);
     }
 
 }
