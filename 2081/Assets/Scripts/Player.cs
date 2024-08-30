@@ -41,6 +41,7 @@ public class Player : Singleton<Player>
 
     private void Interact_Started(InputAction.CallbackContext obj)
     {
+        Debug.Log("SHIT");
         // If interactables nearby, call OnInteract();
         if (interactables.Count <= 0 || PauseMenuManager.IsPaused) return;
         // If interaction successful, remove it from nearby interactables
