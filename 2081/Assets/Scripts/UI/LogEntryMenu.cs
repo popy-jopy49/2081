@@ -19,6 +19,7 @@ public class LogEntryMenu : MonoBehaviour
         {
             loreTablet.OnLorePickUp += OnLorePickUp;
         }
+        print(loreTablets.Length);
     }
 
     private void OnLorePickUp(object sender, int logNumber)
@@ -27,6 +28,7 @@ public class LogEntryMenu : MonoBehaviour
         LoreTabletO loreTablet = sender as LoreTabletO;
         loreTablet.OnLorePickUp -= OnLorePickUp;
 
+        print("Calling");
 		ButtonManager button = Instantiate(GameAssets.I.LogButton, layoutGroupParent).GetComponent<ButtonManager>();
 		Instantiate(GameAssets.I.Spacer, layoutGroupParent);
         button.buttonText = $"Log {logNumber + 1}";
